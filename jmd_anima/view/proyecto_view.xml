@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		
+		<!-- Accion -->
+		<record model="ir.actions.act_window" id="proyecto_actn">
+			<field name="name">Proyecto</field>
+			<field name="res_model">ae.proyecto</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		<!--	<field name="search_view_id" ref="search_view_id"/> -->
+			<field name="help" type="html">
+					<p class="oe_view_nocontent_create">
+						Haga clic aquí para crear un nuevo registro
+					</p>
+			</field>
+		</record>
+			
+		<!-- Menu Principal-->
+		<menuitem id="proyectos_menu" parent="" name="Proyectos" sequence="20" />
+		
+		<!-- Sub Menu -->
+		<menuitem id="proyectos_submenu" parent="proyectos_menu" name="Proyectos" sequence="10" />
+		
+		<!-- Menu Standar Proyectos -->
+		<menuitem id="ae_proyecto_menu" parent="proyectos_submenu" action="proyecto_actn" name="Proyectos" sequence="10" />
+		
+		<!--  Formulario -->
+		<record model="ir.ui.view" id="proyecto_form">
+			<field name="name">proyecto.form</field>
+			<field name="model">ae.proyecto</field>
+			<field name="type">form</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<form string="Proyecto" version="7.0">
+					<sheet>
+						<h1>
+							<field name="name" placeholder="Nombre del Proyecto" />
+						</h1>
+						<group>
+							<group string="Fechas">
+								<field name="cuenta" />
+								<field name="inicio" />
+								<field name="fin" />
+								<field name="estreno" />
+							</group>
+							<group string="Información del Proyecto">
+								<field name="productor" />
+								<field name="director" />
+								<field name="lproductor" />
+								<field name="distribuidor" />
+								<field name="aventas" />
+							</group>
+						</group>
+						<notebook>
+							<page string="Presupuesto">
+								<field name="presupuesto" readonly="True">
+									<tree>
+										<field name="name" />
+										<field name="total" />
+										<field name="state" />
+									</tree>
+								</field>	
+							</page>
+							<page string="Estímulo">
+								<field name="eficine" editable="top/bottom">
+									<tree name="Eficine">
+										<field name="name" />
+										<field name="monto" />
+										<field name="socio" />
+									</tree>
+								</field>
+							</page>
+							<page string="Ventas">
+								<field name="venta">
+									<tree name="Venta">
+										<field name="name" />
+										<field name="tipo" />
+										<field name="ventana" />
+										<field name="territorio" />
+										<field name="inicio" />
+										<field name="fin" />
+										<field name="monto" sum="Total" />
+									</tree>
+								</field>
+							</page>
+							<page string="Coproductores">
+								<field name="cop" />
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers" />
+						<field name="message_ids" widget="mail_thread" />
+					</div>
+				</form>
+			</field>
+		</record>
+		
+		<!--  Lista -->
+		<record model="ir.ui.view" id="proyecto_view">
+			<field name="name">proyecto.view</field>
+			<field name="model">ae.proyecto</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<tree string="proyecto">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+	</data>
+</openerp>

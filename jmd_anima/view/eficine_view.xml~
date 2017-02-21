@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!-- Accion -->
+		<record model="ir.actions.act_window" id="eficine_actn">
+			<field name="name">Estímulos</field>
+			<field name="res_model">ae.eficine</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+					<p class="oe_view_nocontent_create">
+						Haga clic aquí para crear un nuevo registro
+					</p>
+			</field>
+		</record>
+			
+		<!-- Menu -->
+		<menuitem id="eficine_menu" parent="proyectos_submenu" name="Estímulos" action="eficine_actn" groups="" sequence="11" />
+		
+		<!--  Formulario -->
+		<record model="ir.ui.view" id="eficine_edit">
+			<field name="name">eficine.edit</field>
+			<field name="model">ae.eficine</field>
+			<field name="type">form</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<form string="" version="7.0">
+					<header>
+						<button type="object" name="create_move" string="Generar Póliza" />
+						<button type="object" name="create_invoice" string="Generar Factura" />
+					</header>
+					<sheet>
+						<h1>
+							<field name="name" placeholder="Nombre del proyecto" />
+							<field name="tipo" placeholder="Nombre del estímulo"/>
+						</h1>
+						<group>
+							<group string="Datos Fiscales">
+								<field name="monto" />
+								<field name="socio" />
+								<field name="proyecto" />
+							</group>
+							<group string="Aprobación">
+								<field name="aprobacion" />
+								<field name="documento" type="file" filename="nombre_documento"/>
+								<field name="nombre_documento" invisible="True" />
+								
+							</group>
+						</group>
+						<notebook>
+							<page string="Contabilidad">
+								<group>
+									<group string="Poliza">
+										<field name="cuenta_cargo" />
+										<field name="cuenta_abono" />
+										<field name="diario" />
+										<field name="concepto_poliza" />
+										<field name="poliza_generada" readonly="True" />
+									</group>
+									<group string="Factura">
+										<field name="factura" readonly="True"/>
+										<field name="concepto_factura" />
+										<field name="cuenta_factura" />
+									</group>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+							<field name="message_follower_ids" widget="mail_followers" />
+							<field name="message_ids" widget="mail_thread" />
+					</div>
+				</form>
+			</field>
+		</record>
+		
+		<!--  Lista -->
+		<record model="ir.ui.view" id="eficine_view">
+			<field name="name">eficine.view</field>
+			<field name="model">ae.eficine</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<tree string="Eficine">
+					<field name="proyecto" />
+					<field name="socio" />
+					<field name="monto" />
+					<field name="aprobacion" />
+				</tree>
+			</field>
+		</record>
+	</data>
+</openerp>

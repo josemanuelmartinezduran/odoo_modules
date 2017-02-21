@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>
+        <!-- server tree view -->
+        <record model='ir.ui.view' id='mail_server_tree'>
+            <field name='name'>mail_server_tree1</field>
+            <field name='model'>mail_server</field>
+            <field name='type'>tree</field>
+            <field name='arch' type='xml'>
+                <tree string='mail_server'>
+					<field name='name'/>
+                </tree>
+            </field>
+        </record>
+		
+        <!-- server form view -->
+        <record model='ir.ui.view' id='mail_server_form'>
+            <field name='name'>mail_server_form1</field>
+            <field name='model'>mail_server</field>
+            <field name='type'>form</field>
+            <field name='arch' type='xml'>
+                <form string='mail_server' version="7.0">
+					<sheet>
+                        
+                        <group string="Servidor">
+                            <group>
+                                <field name="name" placeholder="Description" required="True"/>
+                                <field name="i_layer"/>
+                            </group>
+                            <group>
+                                <field name="i_server"/>
+                                <field name="i_port"/>
+                            </group>
+                            <group>
+                                <field name="i_user"/>
+                                <field name="i_pass" password="True"/>
+                            </group>
+                        </group>
+                        <group>
+                            <button type="object" name="recibir_facturas" string="Recibir facturas" class="oe_highlight" />
+                            <button type="object" name="eliminar_movimientos" string="Eliminar movimientos" />
+                        </group>
+					</sheet>
+                </form>
+            </field>
+        </record>
+		
+        <!-- server action view -->
+        <record id="mail_server_action" model="ir.actions.act_window">
+            <field name="name">Servidor</field>
+            <field name="res_model">mail_server</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <!-- mail tree view -->
+        <record model='ir.ui.view' id='messages_server_tree'>
+            <field name='name'>messages_server_tree1</field>
+            <field name='model'>messages_server</field>
+            <field name='type'>tree</field>
+            <field name='arch' type='xml'>
+                <tree string='messages_server'>
+					<field name='name'/>
+					<field name='cancelada' />
+					<field name='from'/>
+					<field name='proveedor' />
+					<field name='fecha'/>
+                    <field name='fact'/>
+                    <field name='linea'/>
+                </tree>
+            </field>
+        </record>
+				
+        <!-- mail form view -->
+        <record model='ir.ui.view' id='messages_server_form'>
+            <field name='name'>messages_server_form1</field>
+            <field name='model'>messages_server</field>
+            <field name='type'>form</field>
+            <field name='arch' type='xml'>
+                <form string='messages_server' version='7.0'>
+                    <sheet>
+                    <h1>
+                    	<field name='name'/>
+                    </h1>
+                    <group>
+                        <group string="Correo">
+                            <field name='cancelada' />
+                            <field name='from'/>
+                            <field name='fecha'/>
+                        </group>
+                        <group string="Comprobante">
+                        	<field name="proveedor" />
+                        	<field name='fact'/>
+                        </group>
+                    </group>
+                        <notebook>
+                        	<page string="Distribución de Costos">
+                        		<field name='costos'>
+                        			<tree string="X" editable="bottom">
+                        				<field name="name" />
+										<field name="monto" sum="Suma"/>
+										<field name="proyecto_id" />
+										<field name="centro" />
+										<field name="comentario" />
+                        			</tree>
+                        		</field>
+                        	</page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+							<field name="message_follower_ids" widget="mail_followers" />
+							<field name="message_ids" widget="mail_thread" />
+					</div>
+                </form>
+            </field>
+        </record>
+        
+        <!-- server action view -->
+        <record id="messages_server_action" model="ir.actions.act_window">
+            <field name="name">Procesados</field>
+            <field name="res_model">messages_server</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>        
+     
+        <!-- inherit form view presupuesto.line -->
+        <record model='ir.ui.view' id='inherit_form_presupuesto'>
+            <field name='name'>inherit_form_presupuesto1</field>
+            <field name='model'>ae.presupuesto</field>
+            <field name='inherit_id' ref='jmd_anima.presupuesto_form'/>
+            <field name='arch' type='xml'>
+                <xpath expr="//tree[1]" position="inside">
+					<field name="facturas" />
+					<!-- <fiedl name="total" /> -->
+				</xpath>	
+            </field>
+        </record>
+
+        
+        <!--  Busqueda -->
+		<record model="ir.ui.view" id="dgastos_search">
+			<field name="name">sgastos.search</field>
+			<field name="model">ae.ccostos_line</field>
+			<field name="type">search</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<search string="Search">
+					<group expand="0" string="Group By...">
+						<filter string="Centro de Costos" icon="terp-partner" context="{'group_by':'centro'}"/>
+						<filter string="Proyecto" icon="terp-partner" context="{'group_by':'proyecto_id'}"/>
+					</group>
+				</search>
+			</field>
+		</record>
+		
+		<!-- Accion Distribución de Gastos -->
+		<record model="ir.actions.act_window" id="dgastos_actn">
+			<field name="name">Distribución de Gastos</field>
+			<field name="res_model">ae.ccostos_line</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree</field>
+			<field name="search_view_id" ref="dgastos_search"/>
+			<field name="help" type="html">
+					<p class="oe_view_nocontent_create">
+						Haga clic aquí para crear un nuevo registro
+					</p>
+			</field>
+		</record>
+
+
+        <!--  Lista -->
+		<record model="ir.ui.view" id="dgastos_view">
+			<field name="name">dgastos.view</field>
+			<field name="model">ae.ccostos_line</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<tree string="" toolbar="1">
+					<field name="name" />
+					<field name="monto" sum="Suma" />
+					<field name="proyecto_id" />
+					<field name="centro" />
+					<field name="comentario" />
+				</tree>
+			</field>
+		</record>
+        
+        
+	</data>
+	
+</openerp>

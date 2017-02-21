@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!-- Mercado Libre  -->
+		<record model="ir.module.category" id="mercadolibre">
+	      <field name="name">Mercado Libre</field>
+	      <field name="description">Mercado Libre Permissions</field>
+	   </record>
+	   
+		<record id="meli_user" model="res.groups">
+			<field name="name">User</field>
+			<field name="category_id" ref="mercadolibre"/>
+	   </record>
+	   
+		<record id="meli_admin" model="res.groups">
+			<field name="name">Administrator</field>
+			<field name="category_id" ref="mercadolibre"/>
+	   </record>
+   
+	</data>
+</openerp>

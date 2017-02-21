@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<template id="bar_repo">
+			<html>
+			<head>
+				<title>Etiqueta</title>
+				<style>
+					*{
+					font-family: Arial, Helvetica, Sans-Serif;
+					}
+				</style>
+			</head>
+        		<t t-foreach="docs" t-as="o">
+        			<table border="0" width="54mm">
+      			<tbody>
+        				<tr>
+			          <td style="text-align: center;" ><img src="/jmd_inventario/static/img/logo.jpg" width="110px" /></td>
+			          <td style="text-align: center; font-size:16px; font-weight: bold"><t t-esc="o.desc_40"><br />
+			            </t></td>
+			        </tr>
+			        <tr>
+			          <td style="text-align: center; font-size:18px; font-weight: bold"><t t-esc="o.clave" style="text-align: center"><br />
+			            </t></td>
+			          <td tex-align="center" style="text-align: center; font-size:14px; font-weight: bold" ><t t-esc="o.adscripcion" /> <t t-esc="o.ubicacion" /><br /> 2016
+			            </td>
+			        </tr>
+			        <tr>
+			          <td><br />
+			          </td>
+			          <td tex-align="center" style="text-align: center; font-size:30px; font-weight: bold;">
+			          	<img width="315px" t-att-src="'/report/barcode/Code128/%s' % o.numero"/>
+			          	<!-- <img t-att-src="'/report/barcode/?type=%s&value=%s&width=%s&height=%s'% ('Code128', '5632', 400, 100) " /> -->
+			          	<br />
+								<span>  <t t-esc="o.numero"/> </span> <br />
+			          </td>
+			        </tr>
+      </tbody>
+    </table>
+				</t>
+				</html>
+		</template>
+		
+		<report
+    		id="bar_report"
+    		model="product.asset"
+    		string="Etiqueta"
+    		report_type="qweb-html"
+    		name="jmd_inventario.bar_repo"
+    		file="bar.pdf"
+    		attachment_use="False"
+		/>
+	</data>
+</openerp>

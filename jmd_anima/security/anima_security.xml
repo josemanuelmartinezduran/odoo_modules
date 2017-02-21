@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<record model="ir.module.category" id="ae_proyecto">
+	      <field name="name">Proyecto</field>
+	      <field name="description">Controla los permisos de administración de proyectos</field>
+	</record>
+	
+	<record id="ae_proyecto_lider" model="res.groups">
+		<field name="name">Líder de Proyecto</field>
+		<field name="category_id" ref="ae_proyecto"/>
+	</record>
+
+	<record id="ae_proyecto_usuario" model="res.groups">
+		<field name="name">Usuario</field>
+		<field name="category_id" ref="ae_proyecto"/>
+	</record>	
+</openerp>

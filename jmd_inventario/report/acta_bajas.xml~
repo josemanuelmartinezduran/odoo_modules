@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<template id="baja_repo">
+   	 		<t t-call="report.html_container">
+        		<t t-foreach="docs" t-as="o">
+        			<div class="page">
+                    		<img src="/jmd_inventario/static/img/header.png" />
+                    		<h3>ACTA CIRCUNSTANCIADA DE HECHOS MEDIANTE LA CUAL SE INCORPORAN AL ACTIVO DE FINANCIERA NACIONAL DE DESARROLLO AGROPECUARIO, RURAL, FORESTAL Y PESQUERO DIVERSOS BIENES MUEBLES Y EQUIPO DE ADMINISTRACIÓN DETECTADO COMO SOBRANTE DURANTE EL INVENTARIO FÍSICO CORRESPONDIENTE AL EJERCICIO 2016.</h3>
+                    		<br />
+                    		<br />
+                    		<t t-esc="o.texto_bajas" />
+                    		<br />
+                    		<br />
+                    		<table style="width: 100%" border="1" cellpadding="2">
+							   	<tr>
+							   		<td>Folio de inventario.</td>
+							   		<td>Descripción detallada del  bien faltante.</td>
+							   		<td>Nombre del resguardatario.</td>
+							   		<td>Valor de adquisición.</td>
+							   	</tr>
+							   	<t t-foreach="o.linea_ids" t-as="j">
+							   	<t t-if="j.baja">
+							   		<tr>
+								   		<td><t t-esc="j.clave" /></td>
+								   		<td><t t-esc="j.name" /></td>
+								   		<td><t t-esc="j.responsable" /></td>
+								   		<td><t t-esc="j.valor" /></td>
+								   	</tr>
+							   	</t>
+							   	</t>
+							   </table>
+								<p>
+									<t t-esc="o.texto_bajas2" />
+	    						</p>
+	    						
+	    						<br />
+	    						<br />
+	    						<br />
+	    						<table style="width: 100%" text-align="center" border="0">
+      <tbody>
+        <tr>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>
+        <tr>
+          <td><font face="Arial, sans-serif"><font style="font-size: 12pt" size="3">Nombre
+y
+                Firma Nombre y Firma</font></font>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+              <font color="#000000"><font face="Arial, sans-serif"><font style="font-size: 12pt"
+                    size="3">Coordinador Regional Administrativo. <br />
+                  </font></font></font></p>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+              <font face="Arial, sans-serif"><font style="font-size: 12pt" size="3">
+                </font></font></p>
+            <p class="western" style="margin-bottom: 0cm; line-height: 115%" lang="es-ES">
+            </p>
+          </td>
+          <td><font face="Arial, sans-serif"><font style="font-size: 12pt" size="3">Nombre
+y
+                Firma Nombre y Firma<br />
+                <br />
+              </font></font>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+              <font color="#000000"><font face="Arial, sans-serif"><font style="font-size: 12pt"
+                    size="3">Jefe de Recursos Materiales y Servicios</font></font></font></p>
+            <br />
+          </td>
+        </tr>
+        <tr>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+              <font face="Arial, sans-serif"><font style="font-size: 12pt" size="3">Nombre
+y
+                  Firma <br />
+                </font></font></p>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES"><br />
+            </p>
+            <p class="western" style="margin-left: 10.16cm; text-indent: -10.16cm; margin-bottom: 0cm; line-height: 100%"
+              lang="es-ES"> <font color="#000000"><font face="Arial, sans-serif"><font
+                    style="font-size: 12pt" size="3">Empresa Prestadora de
+                    Servicio.</font></font></font></p>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+            </p>
+          </td>
+          <td>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+              <font face="Arial, sans-serif"><font style="font-size: 12pt" size="3">Nombre
+y
+                  Firma <br />
+                </font></font></p>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES"><br />
+            </p>
+            <p class="western" style="margin-left: 10.16cm; text-indent: -10.16cm; margin-bottom: 0cm; line-height: 100%"
+              lang="es-ES"> <font color="#000000"><font face="Arial, sans-serif"><font
+                    style="font-size: 12pt" size="3">Agente Estatal</font></font></font></p>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    				</div>
+				</t>
+				</t>
+		</template>
+		
+		<report
+    		id="bajas_report"
+    		model="utils.acta"
+    		string="Etiqueta"
+    		report_type="qweb-html"
+    		name="jmd_inventario.baja_repo"
+    		file="baja.pdf"
+    		attachment_use="False"
+		/>
+	</data>
+</openerp>

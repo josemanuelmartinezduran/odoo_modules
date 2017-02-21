@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<template id="saleorder_repo">
+   	 		<t t-call="report.html_container">
+        		<t t-foreach="docs" t-as="o">
+            		<t t-call="report.external_layout">
+                		<div class="page">
+                    		<h3>Orden de Compra <t t-esc="o.name" /></h3>
+                    		<hr />
+                    		<table width="100%">
+                    			<td width="50%">
+		                    		<p>Fecha de la Órden: <span t-field="o.date_order"/><br />
+		                    		Fecha de Entrega: <span t-field="o.entrega"/></p>
+		                    		<p><strong>Proveedor: </strong> <span t-field="o.partner_id.name"/> <br />
+		                    		Dirección: <span t-field="o.partner_id.street"/> <span t-field="o.partner_id.street2"/>
+		                    		<span t-field="o.partner_id.city"/>, <span t-field="o.partner_id.state_id.name"/>, <span t-field="o.partner_id.country_id.name"/> <br />
+		                    		CP: <span t-field="o.partner_id.zip"/>
+		                    		Telefono: <span t-field="o.partner_id.phone"/> Móvil: <span t-field="o.partner_id.mobile"/>
+									Correo: <span t-field="o.partner_id.email"/> <br />
+									Contacto: <span t-field="o.partner_id.contacto"/> 
+									RFC: <span t-field="o.partner_id.rfc"/> </p>
+								</td>
+								<td width="50%">
+		                    		<p>Comprador <span t-field="o.comprador.name"/> <br />
+		                    		Solicitud <span t-field="o.solicitud.name"/> <br />
+		                    		Forma de Pago <span t-field="o.forma"/> <br />
+									Crédito <span t-field="o.credito"/> <br />
+									Descuento <span t-field="o.descuento"/> </p>
+								</td>
+							</table>	
+                    		<p>Nota 1: Haga contar su Número de Pedido, Proyecto y Número de Albarán en su factura dirigida a: <span t-field="o.company_id.name"/> 
+                    		<span t-field="o.company_id.street"/> <span t-field="o.company_id.street2"/>
+                    		<span t-field="o.company_id.city"/> <span t-field="o.company_id.zip"/> </p>
+                    		<p>Nota 2: La fecha límite de recepción de facturas son los días 22 de cada mes. Fecha de pago días 22 de cada mes</p>
+                    		
+                    		<table width="100%" border="1" cellpadding="10">
+									<tr style="backgound-color='#EEEEEE'">
+										<td>Proyecto</td>
+										<td>Centro de Costos</td>
+										<td width="230">Referencia</td>
+										<td width="230">Descrpción</td>
+										<td width="230">Comentarios</td>
+										<td width="70">Cantidad</td>
+										<td width="70">Precio</td>
+										<td width="70">Total</td>
+									</tr>
+                    		<t t-foreach="o.order_line" t-as="i">
+									<tr>
+										<td><t t-esc="i.proyecto_id.mex"/></td>
+										<td><t t-esc="i.centro_costos.clave"/></td>
+										<td><t t-esc="i.product_id.name"/></td>
+										<td><t t-esc="i.descripcion"/></td>
+										<td><t t-esc="i.comentario"/></td>
+										<td><t t-esc="i.product_qty"/></td>
+										<td>$<t t-esc="i.price_unit"/></td>
+										<td>$<t t-esc="i.price_subtotal"/></td>
+									</tr>    							
+							</t>
+								<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+								</tr>
+								
+								<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td>Subtotal</td>
+										<td><t t-esc="o.amount_untaxed"/></td>
+								</tr>
+								<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td>IVA</td>
+										<td><t t-esc="o.amount_tax"/></td>
+								</tr>
+								<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td>Total</td>
+										<td><t t-esc="o.amount_total"/></td>
+								</tr>    
+							</table>
+							<br />
+							<p>Terminos y Condiciones: <span t-field="o.notes"/> </p>
+							<br />
+							<table width="100%" align="center">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr align="center">
+									<td></td>
+									<td align="center">Conforme del Proveedor</td>
+									<td align="center">Director General</td>
+									<td align="center">Comprador</td>
+									<td></td>
+								</tr>
+								<tr align="center">
+									<td></td>
+									<td align="center">Firma</td>
+									<td align="center">Firma</td>
+									<td align="center">Firma</td>
+									<td></td>
+								</tr>
+							</table>
+							<br />
+							<br />
+							<p> Nota 3: <br />
+							a) Como pena convencional por daños se deducirá sin mas comprobación en la compensación final il 0.5% del valor totl de cada etapa <br />
+							según sea el caso de incumplimiento cualesquiera de ellas, por cada día calendario que exceda a todos y cada uno de el (los) plazo(s) acordados <br />
+							hasta un máximo del 5%. Si se presentan circunstancias que no caen bajo la responsabilidad o infuencia del proveedor y/o Aritex Cadding México S.A. de C.V. se volverán a negociar los plazos acordados<br />
+							b) Aritex Cadding de México S.A. de C.V. se guarda la facultad de rechazar al personal contratado que no reúna las características de eficiencia soliditadas según su criterio de evaluación
+							
+							</p>
+							<br />
+							<br />
+                		</div>
+            		</t>
+        		</t>
+    		</t>
+		</template>
+		<report
+    		id="saleorder_report"
+    		model="purchase.order"
+    		string="Orden de Compra"
+    		report_type="qweb-html"
+    		name="aritex.saleorder_repo"
+    		file=""
+    		attachment_use="False"
+		/>
+	</data>
+</openerp>

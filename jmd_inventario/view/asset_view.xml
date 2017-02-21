@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		
+		<!--  Busqueda  -->
+		<record model="ir.ui.view" id="asset_search">
+			<field name="name">asset.search</field>
+			<field name="model">product.asset</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Buscar">
+					<field name="numero" />
+					<field name="name" />
+					<filter icon="terp-document-new" name="inventory" string="Inventariado" domain="[('imagen2','!=','False')]" help="Productos Inventariados"/>
+					<group expand="0" string="Agrupar por...">
+						<filter string="Adscripción" icon="terp-partner" context="{'group_by':'adscripcion'}"/>
+						<filter string="Responsable" icon="terp-partner" context="{'group_by':'responsable'}"/>
+					</group>
+				</search>
+			</field>
+		</record>
+		
+		<!-- Accion  Activos -->
+		<record model="ir.actions.act_window" id="asset_actn">
+			<field name="name">Activos</field>
+			<field name="res_model">product.asset</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,graph</field>
+			<field name="search_view_id" ref="asset_search"/>
+			<field name="help" type="html">
+					<p class="oe_view_nocontent_create">
+						Haga clic aquí para crear un nuevo registro
+					</p>
+			</field>
+		</record>
+		
+		<!-- Grafico Assets -->
+		<record model="ir.ui.view" id="asset_graph">
+			<field name="name">asset.graph</field>
+			<field name="model">product.asset</field>
+			<field name="type">graph</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<graph string="X">
+					<field name="responsable" />
+					<field name="valor" operator="+"/>
+				</graph>
+			</field>
+		</record>		
+		
+		<!--  Formulario  Activos -->
+		<record model="ir.ui.view" id="asset_edit">
+			<field name="name">asset.edit</field>
+			<field name="model">product.asset</field>
+			<field name="type">form</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<form string="X" version="7.0">
+					<sheet>
+						<h1>
+							<field name="name" />
+						</h1>
+						<separator string="Datos Originales" />
+						<group>
+							<group>
+								<field name="numero" />
+								<field name="clave" />
+								<field name="estado" />
+								<field name="descripcion" />
+								<field name="descripcionl" />
+								<field name="adscripcion" />
+								<field name="responsable" />
+								<field name="resguardo" />
+								<field name="serie" />
+								<field name="desc_40" />
+							</group>
+							<group>
+								<field name="origen" />
+								<field name="ubicacion" />
+								<field name="grupo" />
+								<field name="tipo" />
+								<field name="marca" />
+								<field name="modelo" />
+								<field name="valor" />
+								<field name="fecha" />
+								<field name="requisicion" />
+								<field name="proveedor" />
+							</group>
+						</group>
+						<separator string="Nueva Información" />
+						<group>
+							<group string="Resguardo" >
+								<field name="imagen1" filename="nimagen1" required="True"/>
+								<field name="nimagen1" invisible="True" />
+								<field name="imagen2" filename="nimagen2" required="True"/>
+								<field name="nimagen2" invisible="True" />
+							</group>
+							<group string="Estatus" >
+								<field name="hallazgo" />
+								<field name="baja" />
+								<field name="nuevo" />
+								<field name="faltante" />
+								<field name="sobrante" />
+							</group>
+						</group>
+						<separator string="Notas" />
+						<field name="notas" widget="html" />			
+					</sheet>
+					<div class="oe_chatter">
+							<field name="message_follower_ids" widget="mail_followers" />
+							<field name="message_ids" widget="mail_thread" />
+					</div>
+				</form>
+			</field>
+		</record>
+		
+		<!--  Lista   Activos -->
+		<record model="ir.ui.view" id="asset_view">
+			<field name="name">asset.view</field>
+			<field name="model">product.asset</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<tree string="">
+					<field name="name" />
+					<field name="numero" />
+					<field name="clave" />
+					<field name="descripcion" />
+					<field name="adscripcion" />
+					<field name="responsable" />
+				</tree>
+			</field>
+		</record>
+		
+		<!-- Menu Inventarios Principal -->
+		<menuitem id="inventario_main"  name="Activos" />
+
+		<!-- Menu Submenu -->
+		<menuitem id="activos_menu" parent="inventario_main" name="Captura" />		
+		
+		<!-- Menu  Activos -->
+		<menuitem id="asset_menu" parent="activos_menu" name="Activos" action="asset_actn" />
+	</data>
+</openerp>

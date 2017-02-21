@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record model="ir.module.category" id="ae_pagos_sec">
+		      <field name="name">Pagos</field>
+		      <field name="description">Autorización de Pagos</field>
+		</record>
+		<record id="ae_pagos_autorizar" model="res.groups">
+			<field name="name">Autorizar Pagos</field>
+			<field name="category_id" ref="ae_pagos_sec"/>
+		</record>
+		<record id="ae_pagos_contabilidad" model="res.groups">
+			<field name="name">Contabilidad de Pagos</field>
+			<field name="category_id" ref="ae_pagos_sec"/>
+		</record>
+		<record id="ae_pagos_ejecutar" model="res.groups">
+			<field name="name">Ejecutar Pagos</field>
+			<field name="category_id" ref="ae_pagos_sec"/>
+		</record>
+		<record id="ae_pagos_todo" model="res.groups">
+			<field name="name">Super Usuario</field>
+			<field name="category_id" ref="ae_pagos_sec"/>
+		</record>
+	</data>
+</openerp>

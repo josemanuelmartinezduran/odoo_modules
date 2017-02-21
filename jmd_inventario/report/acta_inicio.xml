@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<template id="acta_repo">
+			<t t-call="report.html_container">
+         <t t-foreach="docs" t-as="o">
+        			<div class="page">
+                    		<img src="/jmd_inventario/static/img/header.png" />
+                    		<h3>ACTA DE INICIO DE LEVANTAMIENTO DE INVENTARIO DE BIENES MUEBLES E INSTRUMENTALES 2016 </h3>
+                    		<br />
+                    		<br />
+                    		<t t-esc="o.texto_apertura" />
+							<p>
+    </p>
+    <p class="western" style="margin-bottom: 0.35cm; line-height: 115%" align="justify"
+      lang="es-ES">
+      <font face="Arial Narrow, sans-serif"><u><b>ACTIVIDADES A REALIZAR </b></u></font>
+    </p>
+    <p class="western" style="margin-bottom: 0cm; line-height: 100%" align="justify"
+      lang="es-ES">
+      <font face="Arial Narrow, sans-serif"><font style="font-size: 12pt" size="3">A
+          continuación, se procede a realizar las siguientes actividades. </font></font>
+    </p>
+    <p class="western" style="margin-bottom: 0cm; line-height: 100%" align="justify"
+      lang="es-ES">
+      <br />
+    </p>
+    <table cellpadding="7" cellspacing="0" width="640">
+      <colgroup><col width="624" /> </colgroup>
+      <tbody>
+        <tr>
+          <td style="background: #9bbb59" valign="top" width="624" bgcolor="#9bbb59">
+            <p class="western" align="center" lang="es-ES"><font face="Arial Narrow, sans-serif"><font
+                  style="font-size: 12pt" size="3"><b>DETALLE DE ACTIVIDADES</b></font></font></p>
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1.00pt solid #9bbb59; padding: 0cm 0.19cm" height="7"
+            valign="top" width="624">
+            <p class="western" align="justify" lang="es-ES"><font face="Arial Narrow, sans-serif"><font
+                  style="font-size: 12pt" size="3">1.- Obtener lista de bienes a
+                  inventariar a través del Sistema de Control de Bienes.</font></font></p>
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1.00pt solid #9bbb59; padding: 0cm 0.19cm" height="1"
+            valign="top" width="624">
+            <p class="western" align="justify" lang="es-ES"><font face="Arial Narrow, sans-serif"><font
+                  style="font-size: 12pt" size="3">2.- Localizar o identificar
+                  cada uno de los bienes de acuerdo al listado obtenido conforme
+                  a los datos que los identifican y en las condiciones físicas
+                  que se encuentran.</font></font></p>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-top: none; border-bottom: none; border-left: 1.00pt solid #9bbb59; border-right: 1.00pt solid #9bbb59; padding: 0cm 0.19cm"
+            valign="top" width="624">
+            <p class="western" align="justify" lang="es-ES"><font face="Arial Narrow, sans-serif"><font
+                  style="font-size: 12pt" size="3">3.- Colocar etiquetas de
+                  código de barras con el folio de inventario en aquellos bienes
+                  que se les han caído o están deterioradas, en su caso.</font></font></p>
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1.00pt solid #9bbb59; padding: 0cm 0.19cm" valign="top"
+            width="624">
+            <p class="western" style="margin-bottom: 0cm" align="justify" lang="es-ES">
+              <font face="Arial Narrow, sans-serif"><font style="font-size: 12pt"
+                  size="3">4.- </font></font><font face="Arial Narrow, sans-serif"><font
+                  style="font-size: 12pt" size="3">Emitir Reportes de Resguardo
+                  con la información actualizada y obtener la firma
+                  correspondiente del resguardatario.</font></font></p>
+            <p class="western" align="justify" lang="es-ES"><font face="Arial Narrow, sans-serif"><font
+                  style="font-size: 12pt" size="3">5.- Obtener 2 fotos por cada
+                  bien</font></font></p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+      <br />
+    </p>
+    <p class="western" style="margin-bottom: 0.35cm; line-height: 115%" align="justify"
+      lang="es-ES">
+      <font face="Arial Narrow, sans-serif"><font style="font-size: 12pt" size="3">No
+habiendo
+          otro asunto que manifestar, se cierra parcialmente la
+          presente Acta, siendo las once horas del día de la fecha firmando
+          los que intervienen.</font></font></p>
+    <p class="western" style="margin-bottom: 0cm; line-height: 115%" lang="es-ES">
+      <br />
+    </p>
+    <p class="western" style="margin-bottom: 0cm; line-height: 115%" lang="es-ES">
+      <font face="Arial Narrow, sans-serif"><font style="font-size: 12pt" size="3">______________________________________
+          </font></font></p>
+    <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+      <font face="Arial, sans-serif"><font style="font-size: 12pt" size="3">Nombre
+y
+          Firma del Responsable </font></font>
+    </p>
+    <p class="western" style="margin-bottom: 0cm; line-height: 115%" lang="es-ES">
+      <font face="Arial, sans-serif"><font style="font-size: 12pt" size="3">Empresa
+prestadora
+          del Servicio </font></font>
+    </p>
+    <p class="western" style="margin-bottom: 0cm; line-height: 115%" lang="es-ES">
+      <br />
+    </p>
+    <p class="western" style="margin-bottom: 0cm; line-height: 115%" lang="es-ES">
+      <font face="Arial Narrow, sans-serif"><font style="font-size: 12pt" size="3">______________________________________</font></font></p>
+    <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+      <font color="#000000"><font face="Arial, sans-serif"><font style="font-size: 12pt"
+            size="3">Nombre
+            y Firma del Jefe de </font></font></font>
+    </p>
+    <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+      <font face="Arial, sans-serif"><font style="font-size: 12pt" size="3">Departamento
+de
+          Recursos Materiales</font></font></p>
+    <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+      <font color="#000000"><font face="Arial, sans-serif"><font style="font-size: 12pt"
+            size="3">Y
+            Servicios Generales </font></font></font>
+    </p>
+    <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+      <br />
+    </p>
+    <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+      <br />
+    </p>
+    <p class="western" style="margin-bottom: 0cm; line-height: 115%" lang="es-ES">
+      <font face="Arial Narrow, sans-serif"><font style="font-size: 12pt" size="3">_____________________________________</font></font></p>
+    <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+      <font face="Arial, sans-serif"><font style="font-size: 12pt" size="3">Nombre
+y
+          Firma del Agente Estatal</font></font></p>
+    <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+      <br />
+    </p>
+          		</div>
+				</t>
+				</t>
+		</template>
+		
+		<report
+    		id="inicio_report"
+    		model="utils.acta"
+    		string="Acta de apertura"
+    		report_type="qweb-html"
+    		name="jmd_inventario.acta_repo"
+    		file="acta.pdf"
+    		attachment_use="False"
+		/>
+	</data>
+</openerp>

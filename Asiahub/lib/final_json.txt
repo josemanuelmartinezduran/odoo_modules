@@ -1,0 +1,214 @@
+[
+  {
+    "skuId": "32469554529",
+    "skuSellerId": "32469554529",
+    "productSellerId": "32469554529",
+    "title": "Kit marmita tigelas animadas - 3pcs",
+    "description": "Tipo de Utensílios de Jantar: <br> Conjuntos de louças <br> Number of Users: <br> 2 <br> Produção: <br> Jogo da colher/forquilha/faca/Chopsticks <br> Tipo de Estampa: <br> Personagem <br> Marca: <br> YGS <br> Estilo: <br> Coreano <br> Material: <br> Plástico <br> Característica: <br> Ecologicamente Sustentável&#44;Estocados <br> Certificado: <br> CE / UE&#44;CIQ&#44;EEC&#44;FDA&#44;LFGB&#44;SGS <br> Técnica: <br> Pintado à mão <br> Modelo Número: <br> YGS-Y010 <br> Plástico: <br> Outros <br> Gender: <br> Men&#44; Women&#44; Children <br> Origin:: <br> China <br> Color:: <br> As the picture show <br> Capacity: <br> 830ml <br> Size: <br> 10.8*13.5cm <br> Package: <br> Ordinary Packaging <br> Gift for: <br> Parents&#44; Wife&#44; Friend&#44; Yourself <br> Quality: <br> High quality <br> Shape: <br> Round",
+    "brand": "OEM",
+    "gtin": [
+      ""
+    ],
+    "categories": [
+      "951",
+      "Casa e Decoração",
+      "Cozinha",
+      "Acessórios de Mesa",
+      ""      
+    ],
+    "images": [
+      "http://g03.a.alicdn.com/kf/HTB1eLi_LFXXXXctXVXXq6xXFXXX2/YGS-Y010-Japanese-style-cartoon-bento-box-round-festive-plastic-lunch-box-Dinnerware-Sets-Meal-Box.jpg",
+      "http://g01.a.alicdn.com/kf/HTB1pJbcLFXXXXcIXFXXq6xXFXXX4/YGS-Y010-Japanese-style-cartoon-bento-box-round-festive-plastic-lunch-box-Dinnerware-Sets-Meal-Box.jpg",
+      "",
+      ""
+    ],
+    "videos": [
+      ""
+    ],
+    "price": {
+      "default": 41.26,
+      "offer": 35.57
+    },
+    "stock": {
+      "quantity": 1,
+      "crossDockingTime": 20
+    },
+    "dimensions": {
+      "weight": 0.18,
+      "length": 0.18,
+      "width": 0.135,
+      "height": 0.09
+    },
+    "giftWrap": {
+      "available": true,
+      "value": 0,
+      "messageSupport": true
+    },
+    "attributes": [
+      {
+        "name": "Parcelamento",
+        "value": ""
+      }
+    ]
+  }
+,
+  {
+    "skuId": "32437278805",
+    "skuSellerId": "32437278805",
+    "productSellerId": "32437278805",
+    "title": "Vasilha marmita dupla animada - micro-ondas",
+    "description": "Tipo de Utensílios de Jantar: <br> Pratos <br> Tipo de Estampa: <br> Personagem <br> Marca: <br> YoHere <br> Quantidade: <br> 1 <br> Material: <br> Plástico <br> Característica: <br> Ecologicamente Sustentável <br> Certificado: <br> CE / UE&#44;CIQ <br> Técnica: <br> Pigmentado <br> Plástico: <br> PP <br> Formato: <br> Oval <br> Modelo Número: <br>  KD007 <br> Placa: <br> Prato do arroz",
+    "brand": "OEM",
+    "gtin": [
+      ""
+    ],
+    "categories": [
+      "952",
+      "Casa e Decoração",
+      "Cozinha",
+      "Acessórios de Mesa",
+      ""      
+    ],
+    "images": [
+      "http://g02.a.alicdn.com/kf/HTB15ffYKpXXXXXFXpXXq6xXFXXXn/YoHere-dinnerware-cartoon-bear-children-s-lunch-box-double-high-temperature-microwave-lunch-box.jpg",
+      "",
+      "",
+      ""
+    ],
+    "videos": [
+      ""
+    ],
+    "price": {
+      "default": 12.89,
+      "offer": 11.11
+    },
+    "stock": {
+      "quantity": 1,
+      "crossDockingTime": 20
+    },
+    "dimensions": {
+      "weight": 0.45,
+      "length": 0.18,
+      "width": 0.18,
+      "height": 0.135
+    },
+    "giftWrap": {
+      "available": true,
+      "value": 0,
+      "messageSupport": true
+    },
+    "attributes": [
+      {
+        "name": "Parcelamento",
+        "value": ""
+      }
+    ]
+  }
+,
+  {
+    "skuId": "32615751136",
+    "skuSellerId": "32615751136",
+    "productSellerId": "32615751136",
+    "title": "Pratos decorados sobremesa - cerâmica",
+    "description": " <br>       Tipo de Utensílios de Jantar: <br> Pratos <br> Tipo de Estampa: <br> Personagem <br> Marca: <br> None <br> Material: <br> Cerâmica <br> Cerâmica: <br> Porcelana a base de ossos <br> Técnica: <br> Sob vitrificado <br> Formato: <br> Redondo <br> Modelo Número: <br> None <br> Placa: <br> Prato da placa <br> ",
+    "brand": "OEM",
+    "gtin": [
+      ""
+    ],
+    "categories": [
+      "953",
+      "Casa e Decoração",
+      "Cozinha",
+      "Acessórios de Mesa",
+      ""      
+    ],
+    "images": [
+      "http://g01.a.alicdn.com/kf/HTB17W3YLFXXXXXHXFXXq6xXFXXXj/Animal-Mr-Rabbit-Bird-Cock-Mouse-Dish-Plate-Dinnerware-Fine-Bone-China.jpg",
+      "http://g04.a.alicdn.com/kf/HTB1xcFXLVXXXXaqXXXXq6xXFXXXF/Animal-Mr-Rabbit-Bird-Cock-Mouse-Dish-Plate-Dinnerware-Fine-Bone-China.jpg",
+      "http://g03.a.alicdn.com/kf/HTB1axMULFXXXXbeXFXXq6xXFXXXu/Animal-Mr-Rabbit-Bird-Cock-Mouse-Dish-Plate-Dinnerware-Fine-Bone-China.jpg",
+      ""
+    ],
+    "videos": [
+      ""
+    ],
+    "price": {
+      "default": 196.89,
+      "offer": 169.73
+    },
+    "stock": {
+      "quantity": 1,
+      "crossDockingTime": 20
+    },
+    "dimensions": {
+      "weight": 0.9,
+      "length": 0.225,
+      "width": 0.225,
+      "height": 0.09
+    },
+    "giftWrap": {
+      "available": true,
+      "value": 0,
+      "messageSupport": true
+    },
+    "attributes": [
+      {
+        "name": "Parcelamento",
+        "value": ""
+      }
+    ]
+  }
+,
+  {
+    "skuId": "1545656695",
+    "skuSellerId": "1545656695",
+    "productSellerId": "1545656695",
+    "title": "Aparelho jantar delineado - porcelana 56pcs",
+    "description": "Tipo de Utensílios de Jantar: <br> Conjuntos de louças <br> Tipo de Estampa: <br> Planta <br> Cor: <br> Branco <br> Estilo: <br> Ocidental <br> Material: <br> Porcelana a base de ossos <br> Característica: <br> Ecologicamente Sustentável <br> Certificado: <br> CIQ <br> Técnica: <br> Em-vitrificado <br> Modelo Número: <br> 122520 <br> Number of User: <br> >10",
+    "brand": "OEM",
+    "gtin": [
+      ""
+    ],
+    "categories": [
+      "954",
+      "Casa e Decoração",
+      "Cozinha",
+      "Acessórios de Mesa",
+      ""      
+    ],
+    "images": [
+      "http://g03.a.alicdn.com/kf/HTB1th3yHVXXXXcvXXXXq6xXFXXXa/Porcelain-tableware-fashion-56-bone-china-dinnerware-set-dishes-dish-bone-china-tableware.jpg",
+      "",
+      "",
+      ""
+    ],
+    "videos": [
+      ""
+    ],
+    "price": {
+      "default": 1364.24,
+      "offer": 1176.07
+    },
+    "stock": {
+      "quantity": 1,
+      "crossDockingTime": 20
+    },
+    "dimensions": {
+      "weight": 9,
+      "length": 0.45,
+      "width": 0.45,
+      "height": 0.27
+    },
+    "giftWrap": {
+      "available": true,
+      "value": 0,
+      "messageSupport": true
+    },
+    "attributes": [
+      {
+        "name": "Parcelamento",
+        "value": ""
+      }
+    ]
+  }
+
+]

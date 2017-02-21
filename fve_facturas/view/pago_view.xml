@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!--  Busqueda -->
+		<record model="ir.ui.view" id="pago_search">
+			<field name="name">pago.search</field>
+			<field name="model">ae.cpago</field>
+			<field name="type">search</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<search string="Search">
+					<field name="name" />
+					<filter icon="terp-document-new" name="" string="" domain="[('state','=','draft')]" help=""/>
+					<group expand="0" string="Group By...">
+						<filter string="Mes" icon="terp-partner" context="{'group_by':'mes'}"/>
+						<filter string="Año" icon="terp-partner" context="{'group_by':'year'}"/>
+						<filter string="Proyecto" icon="terp-partner" context="{'group_by':'proyecto'}"/>
+						<filter string="Tipo" icon="terp-partner" context="{'group_by':'tipo'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+		
+		<!-- Accion -->
+		<record model="ir.actions.act_window" id="pago_actn">
+			<field name="name">Tablas de Pago</field>
+			<field name="res_model">ae.cpago</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="search_view_id" ref="pago_search"/>
+			<field name="help" type="html">
+					<p class="oe_view_nocontent_create">
+						Haga clic aquí para crear un nuevo registro
+					</p>
+			</field>
+		</record>
+		
+			
+		<menuitem id="pago_menu" parent="mail_server" name="Tablas de Pago" action="pago_actn" sequence="3" />
+		
+		<!--  Formulario -->
+		<record model="ir.ui.view" id="pago_form">
+			<field name="name">pago.form</field>
+			<field name="model">ae.cpago</field>
+			<field name="type">form</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<form string="Pago" version="7.0">
+					<header>
+						<button name="concilia" type="object" string="Conciliar"/>
+					</header>
+					<sheet>
+						<h1>
+							<field name="name" placeholder="Descripción"/>
+						</h1>
+						<group>
+							<group>
+								<field name="mes" />
+								<field name="year" />
+							</group>
+							<group>
+								<field name="proyecto" />
+								<field name="tipo" />
+							</group>
+						</group>
+						<notebook>
+							<page string="Proyección">
+								<field name="lineas">
+									<tree string="A" editable="bottom" widget="one2many_list">
+										<field name="rfc" />
+										<field name="monto" sum="Total" />
+										<field name="divisa" />
+										<field name="concepto" />
+										<field name="factura" invisible="True" />
+										<field name="pago" invisible="True"/>
+										<field name="recibido" readonly="True" />
+										<field name="presupuestado" readonly="True" />
+										<field name="excedido" readonly="True" />
+										<field name="provisionado" readonly="True" />
+										<field name="ok" readonly="True" />
+										<field name="programado" readonly="True" />
+										<field name="pagado" readonly="True" />
+									</tree>
+								</field>
+							</page>						
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+							<field name="message_follower_ids" widget="mail_followers" />
+							<field name="message_ids" widget="mail_thread" />
+					</div>
+				</form>
+			</field>
+		</record>
+		
+		<!--  Lista -->
+		<record model="ir.ui.view" id="pago_tree">
+			<field name="name">pago.tree</field>
+			<field name="model">ae.cpago</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<tree string="Pago" toolbar="1" colors="">
+					<field name="name" />
+					<field name="mes" />
+					<field name="proyecto" />
+					<field name="year" />
+					<field name="tipo" />
+				</tree>
+			</field>
+		</record>
+		
+		<!--  Busqueda -->
+		<record model="ir.ui.view" id="pagoline_search">
+			<field name="name">pagoline.search</field>
+			<field name="model">ae.cpago.line</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Search">
+					<field name="name" />
+					<filter icon="terp-document-new" name="" string="Por Autorizar" domain="[('programado','=', 'False')]" help=""/>
+					<filter icon="terp-document-new" name="" string="Por Pagar" domain="[('pagado','=', 'False')]" help=""/>
+					<filter icon="terp-document-new" name="" string="Pagado" domain="[('pagado','=', 'True')]" help=""/>
+					<filter icon="terp-document-new" name="" string="Recibidos" domain="[('recibido','=', 'True')]" help=""/>
+					<group expand="0" string="Group By...">
+						<filter string="Tabla de Pago" icon="terp-partner" context="{'group_by':'relacion'}"/>
+						<filter string="RFC" icon="terp-partner" context="{'group_by':'rfc'}"/>
+					</group>
+				</search>
+			</field>
+		</record>		
+		
+		
+		<!-- -->
+
+	<record model="ir.actions.act_window" id="actn_pagoline">
+		<field name="name">Autorizar Pagos</field>
+		<field name="search_view_id" ref="pagoline_search"/>
+		<field name="res_model">ae.cpago.line</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					Haga clic aquí para crear un nuevo registro
+				</p>
+		</field>
+	</record>
+	
+	<!--  -->
+	<menuitem id="aut_apgo_menu" parent="mail_server" name="Autorizar Pagos" action="actn_pagoline" sequence="8"/>
+	
+	<!-- Formulario -->
+		<record model="ir.ui.view" id="pagoline_edit">
+			<field name="name">pagoline.edit</field>
+			<field name="model">ae.cpago.line</field>
+			<field name="type">form</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<form string="" version="7.0">
+					<header>
+						<button name="get_account" string="Leer Cuentas" type="object" attrs="{'invisible': [('programado','=', True)]}" /> <!--  -->
+						<button name="authorize_invoice" string="Ok Contabilidad" type="object" attrs="{'invisible': [('ok','=', True)]}"/>
+						<button name="process_payment" string="Autorizar Pago" type="object" attrs="{'invisible': ['|', ('programado','=', True), ('ok','=', False)]}" />
+						<button name="pay" string="Pagar" type="object"  attrs="{'invisible': ['|', ('programado','=', False), ('pagado','=', True)]}" /> <!--  -->
+						<button name="cancel_move" string="Cancelar" type="object" />
+						<button name="provisiona" string="Provisionar" type="object" attrs="{'invisible': [('provisionado','=', True)]}"/>
+						<button name="cancela_provision" string="Cancelar Provisión" type="object" attrs="{'invisible': [('provisionado','=', False)]}"/>
+					</header>
+					<sheet>
+						<group>
+							<group string="Tabla de Pago">
+								<field name="factura" />
+								<field name="pago" />
+								<field name="monto" />
+								<field name="divisa" />
+								<field name="rfc" />
+							</group>
+							<group string="Estados">
+								<field name="recibido" readonly="True" />
+								<field name="excedido" readonly="True" />
+								<field name="presupuestado" readonly="True" />
+								<field name="programado" readonly="True" />
+								<field name="pagado" readonly="True" />
+								<field name="ok" readonly="True" />
+								<field name="provisionado" readonly="True" />
+							</group>
+						</group>
+						<notebook>
+							<page string="Datos Contables">
+								<group>
+									<group>
+										<field name="cargo" attrs="{'readonly': [('programado','=', True)]}"/>
+										<field name="abono" attrs="{'readonly': [('programado','=', True)]}"/>
+										<field name="banco" attrs="{'readonly': [('pagado','=', True)]}"/>
+										<field name="ivap" attrs="{'readonly': [('programado','=', True)]}"/>
+										<field name="rivap" attrs="{'readonly': [('programado','=', True)]}"/>
+										<field name="risrp" attrs="{'readonly': [('programado','=', True)]}"/>	
+									</group>
+									<group>
+										<field name="diario" />
+										<field name="asiento" />
+										<field name="apago" />
+										<field name="pago" />
+										<field name="iva" attrs="{'readonly': [('programado','=', True)]}"/>
+										<field name="riva" attrs="{'readonly': [('programado','=', True)]}"/>
+										<field name="risr" attrs="{'readonly': [('programado','=', True)]}"/>
+									</group>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+						<div class="oe_chatter">
+							<field name="message_follower_ids" widget="mail_followers" />
+							<field name="message_ids" widget="mail_thread" />
+						</div>
+				</form>
+			</field>
+		</record>
+		
+				<!--  Lista -->
+		<record model="ir.ui.view" id="pagoline_view">
+			<field name="name">pagoline.view</field>
+			<field name="model">ae.cpago.line</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<tree string="X">
+					<field name="factura" />
+					<field name="relacion" />
+					<field name="monto" />
+					<field name="divisa" />
+					<field name="rfc" />
+					<field name="recibido" readonly="True" />
+					<field name="excedido" readonly="True" />
+					<field name="ok" readonly="True" />
+					<field name="presupuestado" readonly="True" />
+					<field name="programado" readonly="True" />
+					<field name="pagado" readonly="True" />
+				</tree>
+			</field>
+		</record>
+
+	</data>
+</openerp>

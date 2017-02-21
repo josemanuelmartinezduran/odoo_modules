@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!--  Formulario Meli QUestions -->
+		<record model="ir.ui.view" id="questions_form">
+			<field name="name">questions.form</field>
+			<field name="model">mercadolibre.questions</field>
+			<field name="type">form</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<form string="X" version="7.0">
+					<header>
+						<button type="object" name="do_answer" string="Submit Answer" help="Submits the answer to Merado Libre"/>
+					</header>
+					<sheet>
+						<h1>
+							<field name="question_id" readonly="True"/>
+						</h1>
+						<i></i>
+						<group>
+							<group>
+								<field name="status" readonly="True" />
+								<field name="posting_id" readonly="True" />
+								<field name="answer_status" readonly="True" />
+								<field name="item_id" readonly="True" />
+							</group>
+							<group>
+								<field name="seller_id" readonly="True"/>
+								<field name="text" readonly="True" />
+								<field name="date_created" readonly="True" />
+								<field name="answer_date_created" readonly="True"/>
+							</group>
+						</group>
+						<notebook>
+							<page string="Answer">
+								<field name="answer_text" />
+							</page>							
+						</notebook>			
+					</sheet>
+				</form>
+			</field>
+		</record>
+	</data>
+</openerp>

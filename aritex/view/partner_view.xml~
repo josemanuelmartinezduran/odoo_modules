@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!-- Modificaciones a la vista	-->
+		<record id="jmd_partner" model="ir.ui.view">
+			<field name="name">jmd.partner</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='function']" position="after">
+					<field name="forma_pago" />
+					<field name="credito" />
+				</xpath>		
+			</field>
+		</record>	
+	</data>
+</openerp>

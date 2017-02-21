@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!-- Accion -->
+		<record model="ir.actions.act_window" id="venta_actn">
+			<field name="name">Ventas</field>
+			<field name="res_model">ae.venta</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+					<p class="oe_view_nocontent_create">
+						Haga clic aquí para crear un nuevo registro
+					</p>
+			</field>
+		</record>
+			
+		<!-- Menu -->
+		<menuitem id="venta_menu" parent="proyectos_submenu" name="Ventas" action="venta_actn" sequence="13" />
+		
+		<!--  Formulario -->
+		<record model="ir.ui.view" id="venta_edit">
+			<field name="name">venta.edit</field>
+			<field name="model">ae.venta</field>
+			<field name="type">form</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<form string="Venta" version="7.0">
+					<header>
+						<button type="object" name="create_move" string="Generar Póliza" />
+						<!-- <button type="object" name="create_invoice" string="Generar Factura" /> -->
+					</header>
+					<sheet>
+						<h1>
+							<field name="name" placeholder="Descripción" />
+						</h1>
+						<group>
+							<group string="Venta">
+								<field name="coproductor" />
+								<field name="monto" />
+								<field name="tipo" />
+								<field name="proyecto" />
+							</group>
+							<group string="Consesión">
+								<field name="ventana" />
+								<field name="territorio" />
+								<field name="inicio" />
+								<field name="fin" />
+							</group>
+						</group>
+						<notebook>
+							<page string="Contabilidad">
+								<group>
+									<group string="Poliza">
+										<field name="cuenta_cargo" />
+										<field name="cuenta_abono" />
+										<field name="diario" />
+									</group>
+									<group string="Poliza">
+										<field name="concepto_poliza" />
+										<field name="poliza_generada" readonly="True" />
+									</group>
+								</group>
+							</page>
+							<page string="Facturas">
+								<field name="factura" />
+							</page>
+						</notebook>
+					</sheet>
+					
+					<div class="oe_chatter">
+							<field name="message_follower_ids" widget="mail_followers" />
+							<field name="message_ids" widget="mail_thread" />
+					</div>
+				</form>
+			</field>
+		</record>
+		
+		<!--  Lista -->
+		<record model="ir.ui.view" id="venta_view">
+			<field name="name">venta.view</field>
+			<field name="model">ae.venta</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<tree string="Venta">
+					<field name="proyecto" />
+					<field name="monto" sum="Total"/>
+					<field name="tipo" />
+					<field name="coproductor" />
+				</tree>
+			</field>
+		</record>
+	</data>
+</openerp>

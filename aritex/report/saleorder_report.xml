@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<template id="saleorder_repo">
+   	 		<t t-call="report.html_container">
+        		<t t-foreach="docs" t-as="o">
+            		<t >
+            			<style>
+            				address
+            				{
+            					visibility: "hidden";
+            				}
+            			</style>
+            			<div class="header">
+            				 <img src='/aritex/static/img/logo.png' style="max-height: 45px; float:left; border: 5px;" />
+           					<h3 style="float:left; margin-left:250px; height:45px; margin-top:10px; margin-bottom:10x;">Orden de Compra <t t-esc="o.name" /></h3>
+ 					 	</div>
+ 					 	<br style="float:none;clear:both"/>		
+                		<div class="page">
+                    		<table width="100%">
+                    			<tr>
+                    			<td width="50%">
+                    				<p style="font-size:11px">Proveedor: <span style="font-size:11px" t-field="o.partner_id.name"/> <br />
+		                    		Dirección: <span style="font-size:11px" t-field="o.partner_id.street"/> <br />
+		                    		<span style="font-size:11px" t-field="o.partner_id.street2"/> <br />
+		                    		<span style="font-size:11px" t-field="o.partner_id.city"/>, <span style="font-size=11px" t-field="o.partner_id.state_id.name"/>, <span t-field="o.partner_id.country_id.name"/> <br />
+		                    		CP: <span style="font-size:11px" t-field="o.partner_id.zip"/>
+		                    		Telefono: <span style="font-size:11px" t-field="o.partner_id.phone"/> <br />
+		                    		Móvil: <span style="font-size:11px" t-field="o.partner_id.mobile"/> <br />
+									Correo: <span style="font-size:11px" t-field="o.partner_id.email"/> <br />
+									Contacto: <span style="font-size:11px" t-field="o.partner_id.contacto"/> <br /> 
+									RFC: <span style="font-size:11px" t-field="o.partner_id.rfc"/> </p>
+		                    		<p style="font-size:11px" >Fecha de la Órden: <span style="font-size:11px" t-field="o.date_order"/><br />
+		                    		Fecha de Entrega: <span style="font-size=11px" t-field="o.entrega"/> <br />
+		                    		Divisa: <span style="font-size:11px" t-field="o.currency_id.name"/> </p>
+		                    		
+								</td>
+								<td width="50%">
+									<p style="font-size:11px">ARITEXCADING MEXICO S.A. DE C.V.<br />
+									AVENIDA ACACIAS NAVE 21, B-1 <br />
+									Autopista de México Puebla KM 117 <br />
+									CUAUTLANCINGO PL <br />
+									CP 72710 <br />
+									Mexico</p>
+		                    		<p style="font-size:11px">Comprador: <span style="font-size:11px" t-field="o.comprador.name"/> <br />
+		                    		Solicitud: <span style="font-size:11px" t-field="o.solicitud.name"/> <br />
+		                    		Forma de Pago: <span style="font-size:11px" t-field="o.forma"/> <br />
+									Crédito: <span style="font-size:11px" t-field="o.credito"/> <br />
+									Descuento: <span style="font-size:11px" t-field="o.descuento"/> </p>
+								</td>
+								</tr>
+							</table>	
+                    		<p style="font-size:9px;">Nota 1: Haga contar su Número de Pedido, Proyecto y Número de Albarán en su factura dirigida a: <span t-field="o.company_id.name"/> 
+                    		<span  style="font-size:9px;" t-field="o.company_id.street" /> <span style="font-size:9px;" t-field="o.company_id.street2"/>
+                    		<span t-field="o.company_id.city"/> <span t-field="o.company_id.zip"/> </p>
+                    		<p style="font-size:9px;">Nota 2: La fecha límite de recepción de facturas son los días 22 de cada mes. Fecha de pago días 22 de cada mes</p>
+                    		
+                    		<table width="100%" border="1" cellpadding="10">
+									<tr style="backgound-color='#EEEEEE'">
+										<td style="font-size:12px">Proyecto</td>
+										<td style="font-size:12px">Centro de Costos</td>
+										<td width="230" style="font-size:12px">Referencia</td>
+										<td width="230" style="font-size:12px">Descripción</td>
+										<td width="230" style="font-size:12px">Comentarios</td>
+										<td width="70" style="font-size:12px">Cantidad</td>
+										<td width="70" style="font-size:12px">Precio</td>
+										<td width="70" style="font-size:12px">Total</td>
+									</tr>
+                    		<t t-foreach="o.order_line" t-as="i">
+									<tr>
+										<td style="font-size:12px"><t t-esc="i.proyecto_id.mex"/></td>
+										<td style="font-size:12px"><t t-esc="i.centro_costos.clave"/></td>
+										<td style="font-size:12px"><t t-esc="i.product_id.name"/></td>
+										<td style="font-size:12px"><t t-esc="i.descripcion"/></td>
+										<td style="font-size:12px"><t t-esc="i.comentario"/></td>
+										<td style="font-size:12px"><t t-esc="i.product_qty"/></td>
+										<td style="font-size:12px">$<t t-esc="i.price_unit"/></td>
+										<td style="font-size:12px">$<t t-esc="i.price_subtotal"/></td>
+									</tr>    							
+							</t>
+								<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+								</tr>
+								
+								<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td style="font-size:12px">Subtotal</td>
+										<td style="font-size:12px"><t t-esc="o.amount_untaxed"/></td>
+								</tr>
+								<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td style="font-size:12px">IVA</td>
+										<td style="font-size:12px"><t t-esc="o.amount_tax"/></td>
+								</tr>
+								<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td style="font-size:12px">Total</td>
+										<td style="font-size:12px"><t t-esc="o.amount_total"/></td>
+								</tr>    
+							</table>
+							<br />
+							<p style="font-size:11px">Términos y Condiciones: <span style="font-size:11px" t-field="o.notes"/> </p>
+							<br />
+							<table width="100%" align="center">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr align="center">
+									<td></td>
+									<td align="center">Conforme del Proveedor</td>
+									<td align="center">Director General</td>
+									<td align="center">Comprador</td>
+									<td></td>
+								</tr>
+								<tr align="center">
+									<td></td>
+									<td align="center">Firma</td>
+									<td align="center">Firma</td>
+									<td align="center">Firma</td>
+									<td></td>
+								</tr>
+							</table>
+							<br />
+							<br />
+							<p style="font-size:9px"> Nota 3: <br />
+							a) Como pena convencional por daños se deducirá sin mas comprobación en la compensación final el 0.5% del valor total de cada etapa 
+							según sea el caso de incumplimiento cualesquiera de ellas, por cada día calendario que exceda a todos y cada uno de el (los) plazo(s) acordados 
+							hasta un máximo del 5%. Si se presentan circunstancias que no caen bajo la responsabilidad o influencia del proveedor y/o Aritexcading México S.A. de C.V. se volverán a negociar los plazos acordados<br />
+							b) Aritexcading México S.A. de C.V. se guarda la facultad de rechazar al personal contratado que no reúna las características de eficiencia solicitadas según su criterio de evaluación
+							
+							</p>
+							<br />
+							<br />
+                		</div>
+            		</t>
+        		</t>
+    		</t>
+		</template>
+		<report
+    		id="saleorder_report"
+    		model="purchase.order"
+    		string="Orden de Compra"
+    		report_type="qweb-html"
+    		name="aritex.saleorder_repo"
+    		file=""
+    		attachment_use="False"
+		/>
+	</data>
+</openerp>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<template id="my_assets_id" name="website assets for my module" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+        <link rel="stylesheet" href="/Asiahub/static/css/src/asiahub.css"/>
+        </xpath>
+    </template>
+	</data>
+</openerp>

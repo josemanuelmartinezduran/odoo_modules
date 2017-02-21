@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!-- Modificaciones a la vista	-->
+		<record id="factura_edit" model="ir.ui.view">
+			<field name="name">factura.edit</field>
+			<field name="model">account.invoice</field>
+			<field name="inherit_id" ref="account.invoice_supplier_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='amount_total']" position="after">
+					<field name="iva" />
+					<field name="retiva" />
+					<field name="retisr" />
+					<field name="total" />
+					<field name="poraprobar" />
+					<field name="caja" />
+				</xpath>
+				<xpath expr="//button[@name='invoice_open']" position="replace">
+					 <button name="invoice_open" attrs="{'invisible': [('poraprobar','!=', False)]}" states="draft" string="Autorizar Pago" class="oe_highlight" groups="account.group_account_invoice"/>
+				</xpath>	
+			</field>
+		</record>	
+	</data>
+</openerp>

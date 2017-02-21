@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>		
+	<data noupdate="1">
+	
+        <!-- Secuencia de Secuencia -->
+        <record id="seq_type_product_asset" model="ir.sequence.type">
+            <field name="name">product.asset</field>
+            <field name="code">product.asset</field>
+        </record>
+
+        <record id="seq_product_asset" model="ir.sequence">
+            <field name="name">product.asset</field>
+            <field name="code">product.asset</field>
+            <field name="padding">0</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
+        <!-- Secuencia de Secuencia -->
+        <record id="seq_type_product_asset_name" model="ir.sequence.type">
+            <field name="name">product.asset.name</field>
+            <field name="code">product.asset.name</field>
+        </record>
+        
+        <record id="seq_product_asset_name" model="ir.sequence">
+            <field name="name">product.asset.name</field>
+            <field name="code">product.asset.name</field>
+            <field name="padding">0</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</openerp>	

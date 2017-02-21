@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!-- Modificaciones a la vista	-->
+		<record id="base.view_currency_form_jmd" model="ir.ui.view">
+			<field name="name">inverse.rates</field>
+			<field name="model">res.currency</field>
+			<field name="inherit_id" ref="base.view_currency_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='rate']" position="after">
+					<field name="tipo_cambio" />
+					<button name="calcula_tipo" string="Calcular" type="object"/>
+				</xpath>
+				<xpath expr="//field[@name='accuracy']" position="after">
+					<field name="divisa_referencia" />
+					<field name="factor" />
+					<field name="mes" />
+					<field name="year" />
+					<button name="inserta_tabla" string="Insertar" type="object"/>
+				</xpath>		
+			</field>
+		</record>	
+	</data>
+</openerp>

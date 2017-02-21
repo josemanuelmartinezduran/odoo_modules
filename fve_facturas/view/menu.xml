@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>
+
+
+        <menuitem id="mail" name="Facturas" />
+
+            <menuitem id="mail_server" parent="mail" name="Facturas" />
+                <menuitem id="mail_servidor_action" parent="mail_server" name="Recibir XML" action="mail_server_action" sequence="1" />
+                <menuitem id="mail_correo_action" parent="mail_server" name="Procesados" action="messages_server_action" sequence="2" />
+                <menuitem id="dgastos_menu" parent="mail_server" name="Distribución de Gastos" action="dgastos_actn" sequence="10" />
+                
+
+	</data>
+	
+</openerp>

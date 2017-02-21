@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<template id="resguardo_repo">
+   	 		<t t-call="report.html_container">
+        		<t t-foreach="docs" t-as="o">
+            		<!-- <t t-call="report.external_layout"> -->
+                		<div class="page">
+                    		<img src="/jmd_inventario/static/img/header.png" />
+                    		<table width="100%" border="1" cellpadding="5">
+      <tbody>
+      	<style>
+      		tr th{
+      			font-size: 10px;
+      		}
+      		tr td{
+      			font-size: 9px;
+      		}
+      	</style>
+        <tr>
+          <td align="right"><b><font color="#000000">Area de Adscripción:</font></b></td>
+          <td align="center"><t t-esc="o.area" /><br />
+          </td>
+          <td align="right"><b><font color="#000000">Fecha:</font></b></td>
+          <td align="center"><t t-esc="o.fecha" /><br />
+          </td>
+        </tr>
+        <tr>
+          <td align="right" ><b><font color="#000000">Responsable del Bien:</font></b></td>
+          <td>
+          <table>
+          	<tr>
+          		<td align="center" style="border-right: black 1px solid; padding-right:30px;"><t t-esc="o.name" /></td>
+          		<td  align="center" style="border-right: black 1px solid" ><b>N. EMP</b></td>
+          		<td align="center" > <t t-esc="o.num_empleado" /></td>
+          	</tr>
+          </table>
+          
+          </td>
+          <td align="right" ><b><font color="#000000">RFC:</font></b></td>
+          <td align="center" ><t t-esc="o.rfc" /><br />
+          </td>
+        </tr>
+        <tr>
+          <td align="right"><b><font color="#000000">Puesto: </font></b></td>
+          <td align="center" ><t t-esc="o.puesto" /><br />
+          </td>
+          <td align="right"><b><font color="#000000">No. Resguardo:</font></b></td>
+          <td align="center" ><t t-esc="o.numero" /><br />
+          </td>
+        </tr>
+        <tr>
+          <td align="right"><b><font color="#000000">Ubicación Fisica: </font></b></td>
+          <td align="center" ><t t-esc="o.ubicacion" /><br />
+          </td>
+          <td align="right"><b><font color="#000000">No. Bienes:</font></b></td>
+          <td align="center" ><t t-esc="o.num_bienes" /><br />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+                    		<table width="100%" border="2">
+									<tr style="backgound-color='#EEEEEE'">
+										<th align="center" width="5%">No. de Bien</th>
+										<th align="center" width="5%">Clave</th>
+										<th align="center" width="5%" >CAMBS</th>
+										<th align="center" width="25%">Descripción</th>
+										<th align="center" width="25%">Descripción Detallada</th>
+										<th align="center" width="5%">Fecha Afecta </th>
+										<th align="center" width="5%">Valor del Bién</th>
+										<th align="center" width="5%">Marca</th>
+										<th align="center" width="5%"> Modelo</th>
+										<th align="center" width="5%">Serie</th>
+										<th align="center" width="5%">Estado del Bien</th>
+										<th align="center" width="5%">Piso</th>
+									</tr>
+									<t t-foreach="o.linea_ids" t-as="i">
+									<tr>
+										<td align="center"><t t-esc="i.consecutivo"/></td>
+										<td align="center"><t t-esc="i.numero"/></td>
+										<td align="center"><t t-esc="i.clave"/></td>
+										<td align="center"><t t-esc="i.dcorta"/></td>
+										<td align="center"><t t-esc="i.descripcion"/></td>
+										<td align="center"><t t-esc="o.fecha" /></td>
+										<td align="center"><t t-esc="i.valor"/></td>
+										<td align="center"><t t-esc="i.marca"/></td>
+										<td align="center"><t t-esc="i.modelo"/></td>
+										<td align="center"><t t-esc="i.serie"/></td>
+										<td align="center"><t t-esc="i.estado"/></td>
+										<td align="center"><t t-esc="i.ubicacion"/></td>
+									</tr>
+									</t>    							
+							</table>
+							<br />
+							<br />
+							<br />
+							<br />
+							<table width="100%">
+								<tr>
+									<td align="center" width="150px"></td>
+									<td align="center">FIRMA RESPONSABLE DE LOS BIENES</td>
+									<td align="center" width="150px"></td>
+									<td align="center">FIRMA RESPONSBLE ADMINISTRATIVO</td>
+									<td align="center"></td>
+								</tr>
+								<tr style="height: 100px">
+									<td align="center" style="border-bottom: none;"></td>
+									<td align="center" style="border-bottom: black solid 1px;"></td>
+									<td align="center" style="border-bottom: none;"></td>
+									<td align="center" style="border-bottom: black solid 1px;"></td>
+									<td align="center"></td>
+								</tr>
+								<tr>
+									<td align="center"></td>
+									<td align="center"><t t-esc="o.responsable_bienes"/></td>
+									<td align="center"></td>
+									<td align="center"><t t-esc="o.administrativo"/></td>
+									<td align="center"></td>	
+								</tr>
+								<tr>
+									<td align="center"></td>
+									<td align="center"><t t-esc="o.puesto_responsable"/></td>
+									<td align="center"></td>
+									<td align="center"><t t-esc="o.puesto_administrativo"/></td>
+									<td align="center"></td>
+								</tr>
+							</table>
+							<br />
+							<br />
+							<br />
+							<br />
+							
+                		</div>
+            		<!-- </t> -->
+        		</t>
+    		</t>
+		</template>
+		<report
+    		id="resguardo_report"
+    		model="inv.resguardo"
+    		string="Resguardo"
+    		report_type="qweb-html"
+    		name="jmd_inventario.resguardo_repo"
+    		file="Resguardo"
+    		attachment_use="False"
+		/>
+	</data>
+</openerp>

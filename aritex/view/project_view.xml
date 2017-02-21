@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!-- Modificaciones a la vista	-->
+		<record id="aritex_project" model="ir.ui.view">
+			<field name="name">aritex.prject</field>
+			<field name="model">ae.proyecto</field>
+			<field name="inherit_id" ref="jmd_anima.proyecto_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//group[@string='Información del Proyecto']" position="replace">
+					<group string="Información del Proyecto">
+						<field name="mex" required="True"/>
+					</group>
+				</xpath>		
+			</field>
+		</record>	
+	</data>
+</openerp>

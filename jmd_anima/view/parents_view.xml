@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!--  Busqueda -->
+		<record model="ir.ui.view" id="parents_search">
+			<field name="name">parents.search</field>
+			<field name="model">utils.parents</field>
+			<field name="type">search</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<search string="Search">
+				</search>
+			</field>
+		</record>
+
+		
+		<!-- Accion -->
+		<record model="ir.actions.act_window" id="parents_actn">
+			<field name="name">Colocar Padres Contables</field>
+			<field name="res_model">utils.parents</field>
+			<field name="view_type">form</field>
+			<field name="search_view_id" ref="parents_search"/>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+					<p class="oe_view_nocontent_create">
+						Haga clic aquí para crear un nuevo registro
+					</p>
+			</field>
+		</record>
+			
+		<!-- Menu -->
+		<menuitem id="parents_menu" parent="presupuesto_submenu" name="Arbol de Cuentas" action="parents_actn" groups="account.group_account_manager" />
+		
+		<!--  Formulario -->
+		<record model="ir.ui.view" id="parents_edit">
+			<field name="name">parents.edit</field>
+			<field name="model">utils.parents</field>
+			<field name="type">form</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<form string="" version="7.0">
+				<header>
+					<button name="set_parents" string="Procesa Arbol de Cuentas" type="object" confirm="¿Desea realizar la Operación?"/>
+				</header>
+					<sheet>
+						<h1>
+							<field name="name" placelder="Descripción" />
+						</h1>
+						<group>
+							<group>
+								<field name="cuenta_raiz" />
+								<field name="tipo_vista" />
+								<field name="inicia_con" />
+							</group>
+							<group>
+								<field name="longitud" />
+								<field name="empresa" />
+							</group>
+						</group>
+						<field name="excepciones" readonly="True">
+							<tree string="X" >
+								<field name="name" />
+								<field name="cuenta" />
+							</tree>
+						</field>
+					</sheet>
+						<div class="oe_chatter">
+							<field name="message_follower_ids" widget="mail_followers" />
+							<field name="message_ids" widget="mail_thread" />
+						</div>
+				</form>
+			</field>
+		</record>
+		
+		<!--  Lista -->
+		<record model="ir.ui.view" id="parents_view">
+			<field name="name">parents.view</field>
+			<field name="model">utils.parents</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<tree string="X" toolbar="1" colors="">
+					<field name="name" />
+					<field name="empresa" />
+					<field name="cuenta_raiz" />
+					<field name="excepciones" />
+				</tree>
+			</field>
+		</record>
+	</data>
+</openerp>

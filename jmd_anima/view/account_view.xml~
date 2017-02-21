@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+      <!-- -->
+      <record model="ir.actions.act_window" id="action_balance">
+	       <field name="name">Balance General</field>
+	       <field name="domain">[('balance_general', '=', True)]</field>
+	       <field name="res_model">account.account</field>
+	       <field name="view_mode">tree</field>
+	       <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+				    Debe definir las cuentas primero
+			    </p>
+	       </field>
+      </record>
+
+    <record model="ir.actions.act_window" id="action_balanza">
+	   <field name="name">Balanza de Comprobacion</field>
+	   <field name="domain">[('balanza_comprobacion', '=', True)]</field>
+	   <field name="res_model">account.account</field>
+	   <field name="view_mode">tree</field>
+	   <field name="help" type="html">
+			<p class="oe_view_nocontent_create">
+				Debe definir las cuentas primero
+			</p>
+	   </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_estado">
+	   <field name="name">Estado de Resultados</field>
+	   <field name="domain">[('estado_resultados', '=', True)]</field>
+	   <field name="res_model">account.account</field>
+	   <field name="view_mode">tree</field>
+	   <field name="help" type="html">
+			<p class="oe_view_nocontent_create">
+				Debe definir las cuentas primero
+			</p>
+	   </field>
+    </record>
+	
+	<menuitem id="menu_repo_account" parent="account.menu_finance" name="Reportes Contables" sequence="4"/>
+	
+	<menuitem id="menu_balance" parent="menu_repo_account" name="Balance General" action="action_balance" sequence="1" />
+	<menuitem id="menu_balanza" parent="menu_repo_account" name="Balanza de Comprobacion" action="action_balanza" sequence="2" />
+	<menuitem id="menu_estado" parent="menu_repo_account" name="Estado de Resultados" action="action_estado" sequence="3" />
+
+
+	<!-- Modificaciones a la vista	Form de Cuentas-->
+    <record id="account_dedit_inh" model="ir.ui.view">
+			<field name="name">account.edit.inh</field>
+			<field name="model">account.account</field>
+			<field name="inherit_id" ref="account.view_account_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='company_id']" position="after">
+					<field name="tipo_cuenta" string="Naturaleza de la Cuenta"/>
+					<field name="balanza_comprobacion" string="Balanza de Comprobación"/>
+					<field name="estado_resultados" string="Estado de Resultados"/> 
+					<field name="balance_general" string="Balance General"/>
+				</xpath>		
+			</field>
+		</record>
+		
+		<!-- Modificaciones a la vista	Tree de Cuentas-->
+		<record id="account_view_inh" model="ir.ui.view">
+			<field name="name">account.view.inh</field>
+			<field name="model">account.account</field>
+			<field name="inherit_id" ref="account.view_account_list"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='credit']" position="after">
+					<field name="tipo_cuenta" string="Naturaleza"/>
+				</xpath>		
+			</field>
+		</record>
+	</data>
+</openerp>

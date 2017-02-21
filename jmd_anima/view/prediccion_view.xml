@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<!--  Busqueda -->
+		<record model="ir.ui.view" id="prediccion_search">
+			<field name="name">prediccion.search</field>
+			<field name="model">ae.prediccion</field>
+			<field name="type">search</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<search string="Search">
+					<field name="name" />
+					<group expand="0" string="Agrupar por...">
+						<filter string="Estado" icon="terp-partner" domain="[]" context="{'state':'partner_id'}"/>
+						<filter string="Proyecto" icon="terp-partner" domain="[]" context="{'proyecto':'partner_id'}"/>
+					</group>
+				</search>
+			</field>
+		</record>		
+		
+		<!-- Accion -->
+		<record model="ir.actions.act_window" id="prediccion_actn">
+			<field name="name">Prediccion Para Flujo de Efectivo</field>
+			<field name="res_model">ae.prediccion</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="search_view_id" ref="prediccion_search"/>
+			<field name="help" type="html">
+					<p class="oe_view_nocontent_create">
+						Haga clic aquí para crear un nuevo registro
+					</p>
+			</field>
+		</record>
+
+		<!-- Menu -->
+		<menuitem id="prediccion_menu" parent="presupuesto_submenu" name="Prediccion Flujo de Efectivo" action="prediccion_actn" sequence="21" />
+		
+		<!--  Formulario -->
+		<record model="ir.ui.view" id="prediccion_form">
+			<field name="name">prediccion.form</field>
+			<field name="model">ae.prediccion</field>
+			<field name="type">form</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<form string="" version="7.0">
+					<header>
+						<button name="cargar_conceptos" string="Cargar Conceptos" type="object"/>	
+                		<field name="state" widget="statusbar" nolabel="1" />
+					</header>
+					<sheet>
+						<h1>
+							<field name="name" placeholder="Nombre" />
+						</h1>
+						<group>
+							<group string="Proyecto">
+								<field name="proyecto" />
+							</group>
+							<group string="Otros Datos">
+								<field name="total" />
+							</group>
+						</group>
+						<notebook>
+							<page string="Lineas del Presupuesto">
+								<field name="linea">
+									<tree name="Lineas" editable="Bottom">
+										<field name="name" invisible="True" />
+										<field name="categoria" />
+										<field name="monto" sum="Total"/>
+										<field name="mes" />
+										<field name="year" />
+										<field name="divisa" invisible="True" />
+									</tree>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<!--  Lista -->
+		<record model="ir.ui.view" id="prediccion_view">
+			<field name="name">prediccion.view</field>
+			<field name="model">ae.prediccion</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<tree string="Prediccion">
+					<field name="name" />
+					<field name="proyecto" />
+					<field name="state" />
+					<field name="total" sum="Total" />
+				</tree>
+			</field>
+		</record>
+		
+
+	</data>
+</openerp>

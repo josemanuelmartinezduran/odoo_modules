@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<template id="fin_repo">
+			<t t-call="report.html_container">
+         <t t-foreach="docs" t-as="o">
+        			<div class="page">
+                    		<img src="/jmd_inventario/static/img/header.png" />
+                    		<h3>ACTA DE CIERRE DE LEVANTAMIENTO DE INVENTARIO DE BIENES MUEBLES E INSTRUMENTALES 2016 </h3>
+                    		<br />
+                    		<br />
+                    		<t t-esc="o.texto_cierre" />
+                    		<p><strong>Actividades Realizadas</strong></p>
+                    		<ul>
+                    			<li>Se hizo el levantamiento de inventario de bienes muebles e instrumentales, para lo cual se cuenta con un reporte general de los bienes con un total de <t t-esc="o.total_activos" /> activos. </li>
+							</ul>
+							
+							<table style="width: 100%" border="1" cellpadding="2" >
+      <tbody>
+        <tr>
+          <td>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" align="center">
+              <font style="font-size: 7pt" size="1"><b>UBICACIÓN</b></font></p>
+          </td>
+          <td>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" align="center"
+              lang="es-ES"> <font color="#000000"><font style="font-size: 7pt"
+                  size="1"><span lang="es-MX"><b>TOTAL DE BIENES CONFORME A
+                      LISTADO DE BIENES AL 28 SEPTIEMBRE DE 2016.</b></span></font></font></p>
+          </td>
+          <td>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" align="center"
+              lang="es-ES"> <font color="#000000"><font style="font-size: 7pt"
+                  size="1"><span lang="es-MX"><b>TOTAL DE BIENES MUEBLES E
+                      INSTRUMENTALES LOCALIZADOS FISICAMENTE</b></span></font></font></p>
+          </td>
+          <td>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" align="center">
+              <font style="font-size: 7pt" size="1"><b>DIFERENICA</b></font></p>
+          </td>
+          <td>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" align="center">
+              <font style="font-size: 7pt" size="1"><b>BIENES EN USO DEL
+                  PERSONAL ADSCRITO </b></font> </p>
+          </td>
+          <td>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" align="center">
+              <font style="font-size: 7pt" size="1"><b>BIENES IDENTIFICADOS PARA
+                  ASIGNACIÓN</b></font></p>
+          </td>
+          <td>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" align="center"
+              lang="es-ES"> <font color="#000000"><font style="font-size: 7pt"
+                  size="1"><span lang="es-MX"><b>BIENES IDENTIFICADOS PARA
+                      INCORPORARSE AL PROGRAMA ANUAL DE BAJA 2017</b></span></font></font></p>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>AGENCIA: <t t-esc="o.name"></t></td>
+          <td><t t-esc="o.total_activos"><br />
+            </t></td>
+          <td><t t-esc="o.total_inventario"><br />
+            </t></td>
+          <td><t t-esc="o.total_faltantes"><br />
+            </t></td>
+          <td><t t-esc="o.total_activos"><br />
+            </t></td>
+          <td>0<br />
+          </td>
+          <td><t t-esc="o.total_bajas"><br />
+            </t></td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <br />
+	<br />
+    <ul>
+    	<li>
+    		Se emitió reporte del resguardo del personal adscrito a la agencia promotora de <t t-esc="o.name" />, como sigue:
+   	</li> 
+   </ul>
+   
+   <table style="width: 100%" border="1" cellpadding="2">
+   	<tr>
+   		<td>
+   			NOMBRE DEL EMPLEADO
+   		</td>
+   		<td>
+   			CANTIDAD DE BIENES ENCONTRADOS
+   		</td>
+   		<td>
+   			FECHA DE REVISIÓN FÍSICA
+   		</td>
+   	</tr>
+   	<t t-foreach="o.persona_ids" t-as="i">
+   	<tr>
+   		<td>
+   			<t t-esc="i.name" />
+   		</td>
+   		<td>
+   			<t t-esc="i.total_bienes" />
+   		</td>
+   		<td>
+   			<t t-esc="o.fecha" />
+   		</td>
+   	</tr>
+   	</t>
+   </table>
+   <br />
+   <br />
+   <br />
+   <ul>
+   <li>
+   	RESULTADOS
+   </li>
+   </ul>
+   <div> 
+		Se identificaron físicamente cada uno de los bienes.<br />
+		Se emitió un total de <t t-esc="o.total_resguardos" /> resguardos <br />
+		Se etiquetaron <t t-esc="o.total_activos" /> bienes. <br />
+		Se identificaron los siguientes bienes faltantes:  <t t-esc="o.total_faltantes" /> <br />
+	</div>
+   <br />
+   
+   <table style="width: 100%" border="1" cellpadding="2">
+   	<tr>
+   		<td>Folio de inventario.</td>
+   		<td>Descripción detallada del  bien faltante.</td>
+   		<td>Nombre del resguardatario.</td>
+   		<td>Valor de adquisición.</td>
+   	</tr>
+   	<t t-foreach="o.linea_ids" t-as="j">
+   	<t t-if="j.faltante">
+   		<tr>
+	   		<td><t t-esc="j.clave" /></td>
+	   		<td><t t-esc="j.name" /></td>
+	   		<td><t t-esc="j.responsable" /></td>
+	   		<td><t t-esc="j.valor" /></td>
+   		</tr>
+   	</t>
+   	</t>
+   </table>
+   <br />
+   <br />
+   <br />
+   
+   <p> Se identificaron los siguientes bienes sobrantes. De ser el caso deberá levantarse acta de hechos. </p>
+   <br />
+   <table style="width: 100%" border="1" cellpadding="2">
+   	<tr>
+   		<td>Folio de inventario.</td>
+   		<td>Descripción detallada del  bien faltante.</td>
+   		<td>Nombre del resguardatario.</td>
+   		<td>Valor de adquisición.</td>
+   	</tr>
+   	<t t-foreach="o.linea_ids" t-as="j">
+   	<t t-if="j.sobrantes">
+   		<tr>
+	   		<td><t t-esc="j.clave" /></td>
+	   		<td><t t-esc="j.name" /></td>
+	   		<td><t t-esc="j.responsable" /></td>
+	   		<td><t t-esc="j.valor" /></td>
+   		</tr>
+   	</t>
+   	</t>
+   </table>
+    <br />
+   <br />
+   <br />
+   
+   <p> Se identificaron los siguientes bienes a considerar para el Programa Anual de Disposición Final y Baja de Bienes Muebles ejercicio 2017:  </p>
+   <br />
+   <table style="width: 100%" border="1" cellpadding="2">
+   	<tr>
+   		<td>Folio de inventario.</td>
+   		<td>Descripción detallada del  bien faltante.</td>
+   		<td>Nombre del resguardatario.</td>
+   		<td>Valor de adquisición.</td>
+   	</tr>
+   	<t t-foreach="o.linea_ids" t-as="j">
+   	<t t-if="j.baja">
+   		<tr>
+	   		<td><t t-esc="j.clave" /></td>
+	   		<td><t t-esc="j.name" /></td>
+	   		<td><t t-esc="j.responsable" /></td>
+	   		<td><t t-esc="j.valor" /></td>
+	   	</tr>
+   	</t>
+   	</t>
+   </table>
+   
+   <br />
+   <br />
+   <br />
+   <p>
+   <t t-esc="o.acta_fin_cierre"/>
+   </p>
+   <br />
+   <br />
+   <br />
+   <table style="width: 100%" text-align="center" border="0">
+      <tbody>
+        <tr>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>
+        <tr>
+          <td><font face="Arial, sans-serif"><font style="font-size: 12pt" size="3">Nombre
+y
+                Firma Nombre y Firma</font></font>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+              <font color="#000000"><font face="Arial, sans-serif"><font style="font-size: 12pt"
+                    size="3">Coordinador Regional Administrativo. <br />
+                  </font></font></font></p>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+              <font face="Arial, sans-serif"><font style="font-size: 12pt" size="3">
+                </font></font></p>
+            <p class="western" style="margin-bottom: 0cm; line-height: 115%" lang="es-ES">
+            </p>
+          </td>
+          <td><font face="Arial, sans-serif"><font style="font-size: 12pt" size="3">Nombre
+y
+                Firma Nombre y Firma<br />
+                <br />
+              </font></font>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+              <font color="#000000"><font face="Arial, sans-serif"><font style="font-size: 12pt"
+                    size="3">Jefe de Recursos Materiales y Servicios</font></font></font></p>
+            <br />
+          </td>
+        </tr>
+        <tr>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+              <font face="Arial, sans-serif"><font style="font-size: 12pt" size="3">Nombre
+y
+                  Firma <br />
+                </font></font></p>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES"><br />
+            </p>
+            <p class="western" style="margin-left: 10.16cm; text-indent: -10.16cm; margin-bottom: 0cm; line-height: 100%"
+              lang="es-ES"> <font color="#000000"><font face="Arial, sans-serif"><font
+                    style="font-size: 12pt" size="3">Empresa Prestadora de
+                    Servicio.</font></font></font></p>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+            </p>
+          </td>
+          <td>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+              <font face="Arial, sans-serif"><font style="font-size: 12pt" size="3">Nombre
+y
+                  Firma <br />
+                </font></font></p>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES"><br />
+            </p>
+            <p class="western" style="margin-left: 10.16cm; text-indent: -10.16cm; margin-bottom: 0cm; line-height: 100%"
+              lang="es-ES"> <font color="#000000"><font face="Arial, sans-serif"><font
+                    style="font-size: 12pt" size="3">Agente Estatal</font></font></font></p>
+            <p class="western" style="margin-bottom: 0cm; line-height: 100%" lang="es-ES">
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+          		</div>
+				</t>
+				</t>
+		</template>
+		
+		<report
+    		id="fin_report"
+    		model="utils.acta"
+    		string="Acta de Cierre"
+    		report_type="qweb-html"
+    		name="jmd_inventario.fin_repo"
+    		file="acta.pdf"
+    		attachment_use="False"
+		/>
+	</data>
+</openerp>

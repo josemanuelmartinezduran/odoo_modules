@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!-- Modificaciones a la vista:	Product Mercado Libre Changes -->
+		<record id="meli_edit" model="ir.ui.view">
+			<field name="name">meli.edit</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="product.product_normal_form_view"/>
+			<field name="arch" type="xml">
+				<xpath expr="//sheet" position="before">
+					<header>
+						<button type="object" name="do_upload" string="Upload to Mercado" />
+						<button type="object" name="do_uploadcnova" string="Upload to Cnova" />
+					</header>
+				</xpath>
+				<xpath expr="//notebook" position="before">
+					<group>
+						<group string="General Information" >
+							<field name="list_price" />
+							<field name="chinesse_name" />
+							<field name="description_meli" />
+							<field name="qantity_meli" />
+							<field name="condition"  readonly="True" />
+							<field name="warranty" />
+							<field name="user_id" invisible="False" />
+						</group>
+						<group string="Stores Information" >
+							<field name="price_meli" />
+							<field name="CSku" />
+							<field name="CEan" />
+							<field name="CMarca" />
+							<field name="CPrice2" />
+							<field name="CHeight" />
+							<field name="CLenght" />
+							<field name="CDepth" />
+							<field name="CWeight" />
+						</group>
+					</group>
+				<separator string="Pictures" help="Write the link to the picute, one per line" />
+
+				<field name="picture1" widget="image" options='{"size": [120, 120]}' />
+				<field name="picture2" widget="image" options='{"size": [120, 120]}' />
+				<field name="picture3" widget="image" options='{"size": [120, 120]}' />
+				<field name="picture4" widget="image" options='{"size": [120, 120]}' />
+				<field name="picture5" widget="image" options='{"size": [120, 120]}' />				
+				
+				<field name="question_data" placeholder="Write the link to the picute, one per line"/>
+				</xpath>
+				
+				<xpath expr="//page[@string='Information']" position="before">
+					<page string="Mercado Libre" invisible="False">
+						<group>
+							<group string="Preset Data" >
+								<field name="listing_type_id" readonly="True" />
+								<field name="condition"  readonly="True" />
+								<field name="buying_mode" readonly="True" />
+								<field name="category_meli" readonly="True" />
+								<field name="currency_name" readonly="True" />
+								<field name="accepts_mercadopago" readonly="True" />
+								<field name="meli_id" readonly="True" />
+							</group>
+							<group string="Data to Set" >
+								<field name="chinesse_name" />
+								<field name="title_meli" />
+								<field name="description_meli" />
+								<field name="warranty" />
+								<field name="qantity_meli" />
+								<field name="price_meli" />
+							</group>
+						</group>
+					</page>
+					<page string="CNova" invisible="False">
+						<group>
+							<group string="Categorization" >
+								 <field name="CDpto" /> 
+    							 <field name="CCat" /> 
+							    <field name="CSub1" />
+							    <field name="CSub2" />
+							    <field name="CSub3" />
+							    <field name="CName" />
+							    <field name="CDesc" />
+							    <field name="CSku" />
+							    <field name="CEan" />
+							</group>
+							<group string="Other Information" >
+							    <field name="CMarca" />
+							    <field name="CPrice2" />
+							    <field name="CHeight" />
+							    <field name="CLenght" />
+							    <field name="CDepth" />
+							    <field name="CWeight" />
+							    <field name="CStock" />
+							    <field name="CDeliver" />
+							    <field name="CPictures" />
+							</group>
+						</group>
+					</page>
+				</xpath>
+				
+				<xpath expr="//notebook" position="attributes">
+					<attribute name="invisible">False</attribute>
+				</xpath>
+			</field>
+		</record>	
+	</data>
+</openerp>

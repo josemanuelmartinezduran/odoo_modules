@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!-- Modificaciones a la vista	-->
+		<record id="company_inh" model="ir.ui.view">
+			<field name="name">company.inh</field>
+			<field name="model">res.company</field>
+			<field name="inherit_id" ref="base.view_company_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='name']" position="after">
+					<field name="rfc" placehoder="RFC" />
+				</xpath>
+				<xpath expr="//page[@string='General Information']" position="after">
+					<page string="Cuentas Contables">
+						<group>
+							<group>
+								<field name="cuenta_facutra" />
+								<field name="diario_factura" />
+								<field name="cuenta_pagos" />
+							</group>
+							<group>
+								<field name="cta_ivap" />
+								<field name="cta_rivap" />
+								<field name="cta_risrp" />
+								<field name="cta_iva" />
+								<field name="cta_riva" />
+								<field name="cta_risr" />
+							</group>
+						</group>
+					</page>
+				</xpath>		
+			</field>
+		</record>	
+	</data>
+</openerp>

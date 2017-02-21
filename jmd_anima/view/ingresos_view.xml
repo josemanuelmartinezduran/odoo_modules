@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!--  Busqueda -->
+		<record model="ir.ui.view" id="ingresos_search">
+			<field name="name">ingresos.search</field>
+			<field name="model">ae.ingresos</field>
+			<field name="type">search</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<search string="Search">
+					<field name="name" />
+					<group expand="0" string="Group By...">
+						<filter string="Proyecto" icon="terp-partner" domain="[]" context="{'group_by':'proyecto'}"/>
+					</group>
+				</search>
+			</field>
+		</record>
+		
+		<!-- Accion -->
+		<record model="ir.actions.act_window" id="ingresos_actn">
+			<field name="name">Ingresos</field>
+			<field name="res_model">ae.ingresos</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="search_view_id" ref="ingresos_search"/>
+			<field name="help" type="html">
+					<p class="oe_view_nocontent_create">
+						Haga clic aquí para crear un nuevo registro
+					</p>
+			</field>
+		</record>
+			
+		<!-- Menu -->
+		
+		<!--  Formulario -->
+		<record model="ir.ui.view" id="ingresos_edit">
+			<field name="name">ingresos.edit</field>
+			<field name="model">ae.ingresos</field>
+			<field name="type">form</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<form string="Ingresos" version="7.0">
+					<sheet>
+						<h1>
+							<field name="name" placeholder="Descripción" />
+						</h1>
+						<group>
+							<group string="Monto">
+								<field name="monto" />
+								<field name="proyecto" />
+							</group>
+							<group string="Concepto">
+								<field name="ventana" />
+								<field name="territorio" />
+								<field name="inicio" />
+								<field name="fin" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<!--  Lista -->
+		<record model="ir.ui.view" id="ingresos_view">
+			<field name="name">ingresos.view</field>
+			<field name="model">ae.ingresos</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<tree string="Ingresos">
+					<field name="proyecto" />
+					<field name="name" />
+					<field name="territorio" />
+					<field name="ventana" />
+					<field name="inicio" />
+					<field name="fin" />
+					<field name="monto" sum="Total"/>
+				</tree>
+			</field>
+		</record>
+	</data>
+</openerp>

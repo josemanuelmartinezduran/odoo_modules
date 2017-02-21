@@ -1,0 +1,211 @@
+# -*- coding: utf-8 -*-
+from openerp.osv import osv, fields
+import poplib
+from email.Parser import Parser
+from xml.dom import minidom
+
+
+class mail_server (osv.Model):
+
+    _name = 'mail_server'
+
+    def recibir_facturas(self, cr, uid, ids, context=None):
+
+        #print("Recibiendo facturas")
+        revisados = self.pool.get("messages_server")
+        facturas = self.pool.get("account.invoice")
+        lineas = self.pool.get("account.invoice.line")
+        partners = self.pool.get("res.partner")
+
+        for i in self.browse(cr, uid, ids, context):
+            #conectando
+            if i.i_layer is True:
+                m = poplib.POP3_SSL(i.i_server, i.i_port)
+            else:
+                m = poplib.POP3(i.i_server, i.i_port)
+            m.user(i.i_user)
+            m.pass_(i.i_pass)
+
+            #leyendo los mails
+            mensajes = len(m.list()[1])
+
+            for i in range(mensajes):
+
+                response, headerLines, bytes = m.retr(i + 1)
+                mensaje = '\n'.join(headerLines)
+                p = Parser()
+                email = p.parsestr(mensaje)
+                #print("\n--------------------")
+                #print(("Mensaje " + str(i + 1) + " ID: " + email['message-id']))
+                #si es mensaje compuesto
+                if email.is_multipart():
+                    #print("Procesando la Factura")
+                    # bucle para cada parte del mensaje
+                    for part in email.get_payload():
+                        #print("Entrando en el ciclo del mail")
+                        # Se mira el mime type de la parte
+                        tipo = part.get_content_type()
+                        #print(tipo)
+                        if tipo == "application/xml" or tipo == "text/xml":
+
+                            #preparar el documento
+                            fp = open('fact_process.xml', 'wb')
+                            fp.write(part.get_payload(decode=True))
+                            fp.close()
+                            doc = minidom.parse('fact_process.xml')
+
+                            tagFolio = 'cfdi:Comprobante'
+                            folio = 0
+                            lFolio = doc.getElementsByTagName(tagFolio)
+                            #print(lFolio)
+                            if lFolio.count > 0:
+                                folio = doc.getElementsByTagName(tagFolio)[0]
+                                foli = folio.getAttribute('folio')
+                                #print("Folio de la factura" + str(foli))
+                            if folio == 0:
+                                #print("El adjunto no contiene Folio")
+                                continue
+                            #revisar que no existe ya el registro
+                            idm = revisados.search(cr, uid,
+                                [('name', '=', foli)])
+                            ids_e = len(revisados.browse(cr, uid, idm, context))
+
+                            if ids_e == 0:
+                                #print("Creando Factura")
+                                #leyendo la fecha
+                                tagComprobante = 'cfdi:Comprobante'
+                                fe = doc.getElementsByTagName(tagComprobante)[0]
+                                fecha = fe.getAttribute('fecha')
+                                #print('Fecha: ' + fecha[0:10])
+
+                                #leyendo el RFC de quien emite la factura
+                                tagEmisor = 'cfdi:Emisor'
+                                emisor = doc.getElementsByTagName(tagEmisor)[0]
+                                rfc = emisor.getAttribute('rfc')
+                                #print("Cliente: " + rfc)
+
+                                #buscando al cliente por rfc
+                                id_proveedor = 0
+                                par = partners.search(cr, uid,
+                                     [('vat', '=', rfc)])
+                                iP = len(partners.browse(cr, uid, par, context))
+                                if iP == 0:
+                                    rfc = "MX" + rfc
+                                    par = partners.search(cr, uid,
+                                     [('vat', '=', rfc)])
+                                    iP = len(partners.browse(cr, uid, par,
+                                        context))
+                                if iP == 0:
+                                    mensaje = 'No existe el proveedor con RFC'
+                                    #print(('Error de Proveedor' + mensaje
+                                    #     + ': ' + rfc))
+                                    continue
+
+                                for i in partners.browse(cr, uid, par, context):
+                                    id_proveedor = i.id
+
+                                #creando la factura
+                                id_fact = facturas.create(cr, uid,
+                                     {
+                                      'partner_id': id_proveedor,
+                                      'date_invoice': fecha[0:10],
+                                      'account_id': 209,
+                                      'journal_id': 2,
+                                      'type': 'in_invoice',
+                                      'reference_type': 'none',
+                                      'currency_id':34,
+                                     },
+                                 context)
+
+                                #leyendo los conceptos de compra
+                                #print("Productos")
+                                tagConcepto = 'cfdi:Concepto'
+                                prods = doc.getElementsByTagName(tagConcepto)
+                                for prod in prods:
+                                    cantidad = prod.getAttribute('cantidad')
+                                    desc = prod.getAttribute('descripcion')
+                                    precio = prod.getAttribute('valorUnitario')
+                                    #print("")
+                                    #print("    Cant.: " + cantidad)
+                                    #print("    Desc.: " + desc.encode("latin1"))
+                                    #print("    Precio: " + precio)
+                                    #creando las lineas de la factura
+                                    lineas.create(cr, uid,
+                                         {
+                                            'invoice_id': id_fact,
+                                            'name': desc,
+                                            'quantity': cantidad,
+                                             'price_unit': precio,
+                                             'account_id':11700,
+                                         },
+                                     context)
+
+                                #creando el registro de guardado
+                                revisados.create(cr, uid,
+                                     {
+                                      'name': foli,
+                                      'from': email["From"],
+                                      'to': email["To"],
+                                      'fact': id_fact,
+                                      'fecha': fecha[0:10],
+                                      'proveedor': id_proveedor,
+                                     },
+                                 context)
+        return True
+
+    _columns = {
+        'name': fields.char('Description'),
+
+        'i_server': fields.char('Server'),
+        'i_port': fields.integer('Port'),
+        'i_type': fields.selection([('i', 'IMAP'), ('p', 'POP')], 'Protocol'),
+        'i_layer': fields.boolean('SSL'),
+        'i_user': fields.char('User'),
+        'i_pass': fields.char('Password'),
+
+        'o_server': fields.char('Server'),
+        'o_port': fields.integer('Port'),
+        'o_layer': fields.boolean('SSL'),
+        'o_user': fields.char('User'),
+        'o_pass': fields.char('Password')
+    }
+
+
+class messages_server (osv.Model):
+    _inherit = "mail.thread"
+    _name = 'messages_server'
+    _columns = {
+        'name': fields.char('Folio'),
+        'from': fields.char('De'),
+        'to': fields.char('Para'),
+        'fact': fields.many2one('account.invoice', string='Factura'),
+        'fecha': fields.date('Fecha'),
+        'linea': fields.many2one('ae.presupuesto.linea',
+             string='Presupuesto'),
+        'proveedor': fields.many2one("res.partner", string="Proveedor"),
+        'costos': fields.one2many("ae.ccostos_line",
+            "message_id", string="Distribución de Costos", )
+    }
+
+
+class jmdccostos(osv.Model):
+    _inherit = "mail.thread"
+    _name = "ae.ccostos_line"
+    _columns = {
+        'name': fields.char(string="Descripción", size=40),
+        'monto': fields.float(string="Monto", digits=(9, 2)),
+        'centro': fields.many2one("ae.centro_costos",
+            string="Centro de Costos"),
+        'comentario': fields.char("Comentario"),
+        'message_id': fields.many2one("messages_server",
+            string="Gasto", ondelete="set null"),
+        'proyecto_id': fields.many2one("ae.proyecto", string="Proyecto"),
+        }
+
+
+class relacion_presupuesto_mensaje(osv.Model):
+    _name = 'presupuesto_mensaje'
+    _columns = {
+        'id_m': fields.integer('Id del mensaje'),
+        'id_p': fields.integer('id de la linea')
+    }

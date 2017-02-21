@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!-- Modificaciones a la vista	-->
+		<record id="jmd_pruchase_edit" model="ir.ui.view">
+			<field name="name">jmd.purchase.edit</field>
+			<field name="model">purchase.order</field>
+			<field name="inherit_id" ref="purchase.purchase_order_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='product_qty']" position="after">
+					<field name="proyecto_id" />
+					<field name="centro_costos" />
+					<field name="comentario" />
+					<field name="descripcion" />
+				</xpath>
+				<xpath expr="//field[@name='date_order']" position="after">
+					<field name="forma" />
+					<field name="credito" />
+					<field name="entrega" />
+					<field name="descuento" />
+				</xpath>
+				<xpath expr="//field[@name='partner_id']" position="after">
+					<field name="comprador" />
+					<field name="solicitud" />
+				</xpath>
+				<xpath expr="//field[@name='date_planned']" position="attributes">
+					<attribute name="invisible">True</attribute>
+				</xpath>
+				<xpath expr="//field[@name='order_line']" position="attributes">
+					<attribute name="attrs">{'readonly': [('state','=', 'done')]}</attribute> 
+				</xpath>		
+			</field>
+		</record>
+
+		<!--  Busqueda -->
+		<record model="ir.ui.view" id="order_line_search">
+			<field name="name">order.line.search</field>
+			<field name="model">purchase.order.line</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Search">
+					<field name="name" />
+					<group expand="0" string="Group By...">
+						<filter string="Proyecto" icon="terp-partner" domain="[]" context="{'group_by': 'proyecto_id'} "/>
+						<filter string="Centro de Costos" icon="terp-partner" domain="[]" context="{'group_by':'centro_costos'}"/>
+						<filter string="Orden de Compra" icon="terp-partner" domain="[]" context="{'group_by':'order_id'}"/>
+						<filter string="Estatus" icon="terp-partner" domain="[]" context="{'group_by':'state'}"/>
+					</group>
+				</search>
+			</field>
+		</record>		
+		
+		
+		<!-- Accion Lineas de la Orden de Compra-->
+
+		<record model="ir.actions.act_window" id="order_line_actn">
+			<field name="name">Detalle de Compras</field>
+			<field name="res_model">purchase.order.line</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,graph</field>
+			<field name="search_view_id" ref="order_line_search"/>
+			<field name="help" type="html">
+					<p class="oe_view_nocontent_create">
+						Haga clic aquí para crear un nuevo registro
+					</p>
+			</field>
+		</record>
+		
+		<!-- Grafico -->
+			<record model="ir.ui.view" id="purchase_line_graph">
+				<field name="name">purchase.line.graph</field>
+				<field name="model">purchase.order.line</field>
+				<field name="type">graph</field>
+				<field name="priority" eval="16"/>
+				<field name="arch" type="xml">
+					<graph string="Reporte de Compras">
+						<field name="name" />
+						<field name="product_qty" operator="+"/>
+						<field name="price_unit" operator="+"/>
+					</graph>
+				</field>
+			</record>
+		
+		<!--  Lista -->
+		<record model="ir.ui.view" id="order_line_view">
+			<field name="name">order.line.view</field>
+			<field name="model">purchase.order.line</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="16"/>
+			<field name="arch" type="xml">
+				<tree string="X" toolbar="1" colors="">
+					<field name="product_id" />
+					<field name="name" />					
+					<field name="proyecto_id" />
+					<field name="centro_costos" />
+					<field name="order_id" string="Orden de Compra"/>
+					<field name="comentario" />
+					<field name="descripcion" />
+					<field name="product_qty" />
+					<field name="price_unit" />
+					<field name="taxes_id" widget="many2many2_tags" />
+					<field name="total" sum="Total"/>
+				</tree>
+			</field>
+		</record>
+		
+		<!--  -->
+		<menuitem id="lines_menu" parent="purchase.menu_procurement_management" name="Detalle de Compras" action="order_line_actn" />
+
+	</data>
+</openerp>
